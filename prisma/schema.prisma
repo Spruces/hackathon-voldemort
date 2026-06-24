@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Restaurant {
+  id           Int      @id @default(autoincrement())
+  nameKor      String
+  nameEng      String?
+  locationNorm String
+  locationRaw  String?
+  categoryNorm String
+  categoryRaw  String?
+  tel          String?
+  address      String
+  lat          Float?
+  lng          Float?
+  publicDesc   String?
+  hours        String?
+  internalMemo String?
+  parking      String?
+  country      String   @default("Korea")
+
+  catchtableAlias   String?
+  catchtableMatched Boolean @default(false)
+
+  updatedBy String?
+  updatedAt DateTime @default(now()) @updatedAt
+  createdAt DateTime @default(now())
+
+  catchtableCache CatchtableCache?
+  daySlots        DaySlotCache[]
+}
+
+model CatchtableCache {
+  id           Int      @id @default(autoincrement())
+  restaurantId Int      @unique
+  alias        String
+  shopRef      String?
+  shopName     String?
+  bizHours     String?
+  parkingGuide String?
+  priceLunch   String?
+  priceDinner  String?
+  rating       String?
+  imageUrl     String?
+  onlineYn     String?
+  serviceDesc  String?
+  fetchedAt    DateTime
+  ttl          Int      @default(604800)
+
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id])
+}
+
+model DaySlotCache {
+  id              Int      @id @default(autoincrement())
+  restaurantId    Int
+  date            String
+  availableStatus String
+  availablePersons String?
+  benefit         String?
+  fetchedAt       DateTime
+  ttl             Int      @default(1800)
+
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id])
+
+  @@unique([restaurantId, date])
+}
+
+model AccessConfig {
+  id                 Int      @id @default(autoincrement())
+  urlToken           String   @unique
+  viewerPasswordHash String
+  ownerPasswordHash  String
+  sessionDays        Int      @default(7)
+  updatedAt          DateTime @default(now()) @updatedAt
+}
+
+model Session {
+  token     String   @id
+  role      String
+  expiresAt DateTime
+}

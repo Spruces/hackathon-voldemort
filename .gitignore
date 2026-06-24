@@ -37,3 +37,7 @@ secrets.json
 
 # === Claude Code 개인 설정 (PC별 로컬 설정, 공유 불필요) ===
 .claude/settings.local.json
+
+/src/generated/prisma
+prisma/dev.db
+prisma/dev.db-journal

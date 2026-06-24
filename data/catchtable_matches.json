@@ -1,0 +1,1985 @@
+{
+  "summary": {
+    "total": 228,
+    "matched": 208,
+    "exact_match": 181,
+    "fuzzy_match": 27,
+    "no_match": 20
+  },
+  "matches": [
+    {
+      "idx": 1,
+      "name_kor": "몽고네",
+      "location": "신사동",
+      "ct_code": "mongone",
+      "ct_name": "몽고네",
+      "ct_addr": "서울특별시 강남구 선릉로155길 5 1층",
+      "exact": true
+    },
+    {
+      "idx": 2,
+      "name_kor": "라모라",
+      "location": "서초동",
+      "ct_code": "lamorra",
+      "ct_name": "라모라",
+      "ct_addr": "서울특별시 서초구 동광로39길 50 대경빌딩",
+      "exact": true
+    },
+    {
+      "idx": 3,
+      "name_kor": "미피아체",
+      "location": "청담동",
+      "ct_code": "mipiace",
+      "ct_name": "미피아체",
+      "ct_addr": "서울특별시 강남구 도산대로70길 34 1층",
+      "exact": true
+    },
+    {
+      "idx": 4,
+      "name_kor": "쿠촐로 테라짜",
+      "location": "청담동",
+      "ct_code": "cuccioloterrazza",
+      "ct_name": "쿠촐로 테라짜",
+      "ct_addr": "서울특별시 강남구 선릉로152길 33 1층",
+      "exact": true
+    },
+    {
+      "idx": 5,
+      "name_kor": "알라 프라마",
+      "location": "논현동",
+      "ct_code": "allaprima",
+      "ct_name": "알라프리마",
+      "ct_addr": "서울특별시 강남구 학동로17길 13 인본, 1층",
+      "exact": false
+    },
+    {
+      "idx": 6,
+      "name_kor": "티톨로",
+      "location": "청담동",
+      "ct_code": "titolokor",
+      "ct_name": "티톨로 TITOLO",
+      "ct_addr": "서울특별시 강남구 선릉로162길 27-3 아크네스튜디오 옆 1층",
+      "exact": true
+    },
+    {
+      "idx": 7,
+      "name_kor": "톡톡",
+      "location": "청담동",
+      "ct_code": "toctocseoul",
+      "ct_name": "TocToc",
+      "ct_addr": "서울특별시 강남구 학동로97길 41 리유빌딩 3층",
+      "exact": false
+    },
+    {
+      "idx": 8,
+      "name_kor": "시고로",
+      "location": "청담동",
+      "ct_code": "sigolo",
+      "ct_name": "시고로",
+      "ct_addr": "서울특별시 강남구 선릉로146길 27-3 2층",
+      "exact": true
+    },
+    {
+      "idx": 9,
+      "name_kor": "보르고 한남",
+      "location": "한남동",
+      "ct_code": "borgo_hannam",
+      "ct_name": "보르고한남",
+      "ct_addr": "서울특별시 용산구 이태원로54길 31 3층",
+      "exact": true
+    },
+    {
+      "idx": 10,
+      "name_kor": "브레라",
+      "location": "신당동",
+      "ct_code": "Y2F0Y2hfTUVqVjBJdHJGVlNJRE9uZEZaL01MZz09",
+      "ct_name": "브레라",
+      "ct_addr": "서울특별시 중구 동호로17길 295 2층",
+      "exact": true
+    },
+    {
+      "idx": 11,
+      "name_kor": "꼰떼넨떼",
+      "location": "분당",
+      "ct_code": "conte_n",
+      "ct_name": "꼰떼넨떼 더 광교",
+      "ct_addr": "경기 수원시 영통구 광교중앙로 170 1층 꼰떼넨떼 더 광교",
+      "exact": true
+    },
+    {
+      "idx": 12,
+      "name_kor": "바위파스타바",
+      "location": "한남동",
+      "ct_code": "bawi_ssg",
+      "ct_name": "바위파스타바 강남신세계점",
+      "ct_addr": "서울특별시 서초구 신반포로 176 센트럴시티 하우스오브신세계 1층",
+      "exact": true
+    },
+    {
+      "idx": 13,
+      "name_kor": "페리지",
+      "location": "삼성동",
+      "ct_code": "perigee_seoul",
+      "ct_name": "페리지 (PERIGEE)",
+      "ct_addr": "서울 강남구 봉은사로68길 6-5",
+      "exact": true
+    },
+    {
+      "idx": 14,
+      "name_kor": "페코리노",
+      "location": "청담동",
+      "ct_code": "pecorino",
+      "ct_name": "페코리노",
+      "ct_addr": "서울특별시 강남구 도산대로68길 18 1층",
+      "exact": true
+    },
+    {
+      "idx": 15,
+      "name_kor": "커먼맨션",
+      "location": "종로구",
+      "ct_code": "commonmansion",
+      "ct_name": "커먼맨션",
+      "ct_addr": "서울특별시 종로구 경희궁길 36 2층 204호",
+      "exact": true
+    },
+    {
+      "idx": 16,
+      "name_kor": "가드너 아드리아",
+      "location": "압구정동",
+      "ct_code": "Y2F0Y2hfNGZNblI0eS9LWVIveUZOVFpvcnhoQT09",
+      "ct_name": "가드너 아드리아",
+      "ct_addr": "서울특별시 강남구 압구정로46길 73 1층",
+      "exact": true
+    },
+    {
+      "idx": 17,
+      "name_kor": "오만지아",
+      "location": "한남동",
+      "ct_code": "OMANGIA",
+      "ct_name": "오만지아",
+      "ct_addr": "서울특별시 용산구 유엔빌리지길 14 지하 1층",
+      "exact": true
+    },
+    {
+      "idx": 18,
+      "name_kor": "오스테리아 오르조",
+      "location": "한남동",
+      "ct_code": "osteriaorzo",
+      "ct_name": "오스테리아 오르조",
+      "ct_addr": "서울특별시 용산구 한남대로20길 47 2층",
+      "exact": true
+    },
+    {
+      "idx": 19,
+      "name_kor": "마리또에몰리에",
+      "location": "한남동",
+      "ct_code": "Y2F0Y2hfdGNSNnIzNCs5Q243cWxCMXpVOEZVUT09",
+      "ct_name": "마리또에몰리에",
+      "ct_addr": "서울 용산구 한남대로18길 27",
+      "exact": true
+    },
+    {
+      "idx": 20,
+      "name_kor": "메종 한남",
+      "location": "한남동",
+      "ct_code": "maisonhannam",
+      "ct_name": "MAISON HANNAM",
+      "ct_addr": "서울특별시 용산구 유엔빌리지3길 24 1층",
+      "exact": false
+    },
+    {
+      "idx": 21,
+      "name_kor": "볼리치네",
+      "location": "한남동",
+      "ct_code": "bollicine",
+      "ct_name": "볼리치네",
+      "ct_addr": "서울 용산구 독서당로 71 1층",
+      "exact": true
+    },
+    {
+      "idx": 22,
+      "name_kor": "라쿠치나",
+      "location": "용산구",
+      "ct_code": "lacucina",
+      "ct_name": "라쿠치나",
+      "ct_addr": "서울특별시 용산구 회나무로44길 10 라쿠치나 1층",
+      "exact": true
+    },
+    {
+      "idx": 23,
+      "name_kor": "우오보",
+      "location": "도곡동",
+      "ct_code": "uovopastabar",
+      "ct_name": "우오보 레스토랑 도곡",
+      "ct_addr": "서울특별시 강남구 논현로26길 8 1층",
+      "exact": true
+    },
+    {
+      "idx": 24,
+      "name_kor": "리알토",
+      "location": "청담동",
+      "ct_code": "rialto",
+      "ct_name": "리알토",
+      "ct_addr": "서울특별시 강남구 삼성로149길 13 2층",
+      "exact": true
+    },
+    {
+      "idx": 25,
+      "name_kor": "도우룸",
+      "location": "방배동",
+      "ct_code": "doroom_seoraevillage",
+      "ct_name": "도우룸 서래마을",
+      "ct_addr": "서울특별시 서초구 동광로 99 2층",
+      "exact": true
+    },
+    {
+      "idx": 26,
+      "name_kor": "에그앤 플라워",
+      "location": "남영동",
+      "ct_code": "eggandflour",
+      "ct_name": "에그앤플라워 해방촌 본점",
+      "ct_addr": "서울특별시 용산구 신흥로26길 35 2층",
+      "exact": true
+    },
+    {
+      "idx": 27,
+      "name_kor": "볼라레",
+      "location": "서초동",
+      "ct_code": "volare",
+      "ct_name": "볼라레",
+      "ct_addr": "서울특별시 서초구 사평대로20길 8 성훈빌딩 1층",
+      "exact": true
+    },
+    {
+      "idx": 28,
+      "name_kor": "빠넬로",
+      "location": "합정동",
+      "ct_code": "panello",
+      "ct_name": "빠넬로",
+      "ct_addr": "서울특별시 마포구 어울마당로5길 29 건우상가주택 1층",
+      "exact": true
+    },
+    {
+      "idx": 29,
+      "name_kor": "포노부오노",
+      "location": "압구정동",
+      "ct_code": "ponobouno",
+      "ct_name": "PONO BUONO 포노 부오노",
+      "ct_addr": "서울특별시 강남구 도산대로45길 8-7 2층",
+      "exact": true
+    },
+    {
+      "idx": 30,
+      "name_kor": "페르멘토 한남",
+      "location": "한남동",
+      "ct_code": "fermento",
+      "ct_name": "페르멘토 한남",
+      "ct_addr": "서울특별시 용산구 한남대로20길 47-26 1층",
+      "exact": true
+    },
+    {
+      "idx": 32,
+      "name_kor": "부자피자 1호점",
+      "location": "한남동",
+      "ct_code": "buzapizza",
+      "ct_name": "부자피자 1호점",
+      "ct_addr": "서울특별시 용산구 이태원로55가길 28",
+      "exact": true
+    },
+    {
+      "idx": 33,
+      "name_kor": "더 루프",
+      "location": "한남동",
+      "ct_code": "TAECHO",
+      "ct_name": "더루프서울 The Roof Seoul",
+      "ct_addr": "서울특별시 중구 명동길 56 8층",
+      "exact": true
+    },
+    {
+      "idx": 34,
+      "name_kor": "뻬를라",
+      "location": "압구정동",
+      "ct_code": "pizzeria_perla_",
+      "ct_name": "뻬를라",
+      "ct_addr": "서울특별시 강남구 도산대로55길 43 세정빌딩 1층",
+      "exact": true
+    },
+    {
+      "idx": 37,
+      "name_kor": "더 화이트",
+      "location": "상일동",
+      "ct_code": "thewhite_cesco",
+      "ct_name": "더 화이트 (THE WHITE)",
+      "ct_addr": "서울특별시 강동구 상일로6길 67 세스코 맴버스시티 10층",
+      "exact": true
+    },
+    {
+      "idx": 38,
+      "name_kor": "레스쁘아",
+      "location": "청담동",
+      "ct_code": "lespoir_",
+      "ct_name": "레스쁘아 (L'Espoir)",
+      "ct_addr": "서울특별시 강남구 도산대로56길 10 2층",
+      "exact": true
+    },
+    {
+      "idx": 39,
+      "name_kor": "비스트로 욘트빌",
+      "location": "청담동",
+      "ct_code": "yountville",
+      "ct_name": "BISTROT de YOUNTVILLE",
+      "ct_addr": "서울특별시 강남구 선릉로158길 13-7 1층",
+      "exact": false
+    },
+    {
+      "idx": 40,
+      "name_kor": "라미띠에",
+      "location": "신사동",
+      "ct_code": "lamitie",
+      "ct_name": "라미띠에",
+      "ct_addr": "서울특별시 강남구 도산대로67길 30 2층",
+      "exact": true
+    },
+    {
+      "idx": 41,
+      "name_kor": "스와니예",
+      "location": "신사동",
+      "ct_code": "soigneseoul",
+      "ct_name": "SOIGNE",
+      "ct_addr": "서울특별시 강남구 강남대로 652 SINSA SQUARE 2층",
+      "exact": false
+    },
+    {
+      "idx": 42,
+      "name_kor": "라망시크레",
+      "location": "회현동",
+      "ct_code": "lamantsecret",
+      "ct_name": "라망시크레",
+      "ct_addr": "서울특별시 중구 퇴계로 67 레스케이프 호텔 26층",
+      "exact": true
+    },
+    {
+      "idx": 43,
+      "name_kor": "덱스터",
+      "location": "청담동",
+      "ct_code": "restaurant_dexter",
+      "ct_name": "레스토랑 덱스터",
+      "ct_addr": "서울특별시 강남구 삼성로149길 13 지하 1층",
+      "exact": true
+    },
+    {
+      "idx": 44,
+      "name_kor": "르쉐프블루",
+      "location": "충정로",
+      "ct_code": "lechefbleu",
+      "ct_name": "르 셰프 블루",
+      "ct_addr": "서울특별시 중구 청파로 435-10 썸웨어77 1,2층",
+      "exact": false
+    },
+    {
+      "idx": 46,
+      "name_kor": "부베트",
+      "location": "압구정동",
+      "ct_code": "buvetteseoul",
+      "ct_name": "부베트 서울 Buvette Seoul",
+      "ct_addr": "서울특별시 강남구 논현로 854 ANdAZ",
+      "exact": true
+    },
+    {
+      "idx": 47,
+      "name_kor": "이스트",
+      "location": "압구정동",
+      "ct_code": "eastbygate",
+      "ct_name": "이스트바이게이트",
+      "ct_addr": "인천광역시 연수구 송도국제대로 123 현대프리미엄 아울렛 송도점 1층",
+      "exact": true
+    },
+    {
+      "idx": 48,
+      "name_kor": "렁팡스",
+      "location": "종로구",
+      "ct_code": "lenfance",
+      "ct_name": "L'enfance 렁팡스",
+      "ct_addr": "서울특별시 종로구 경희궁길 36 3층",
+      "exact": true
+    },
+    {
+      "idx": 51,
+      "name_kor": "알레즈",
+      "location": "한남동",
+      "ct_code": "alaise",
+      "ct_name": "알레즈 AL'AISE",
+      "ct_addr": "서울특별시 용산구 독서당로 89 1층",
+      "exact": true
+    },
+    {
+      "idx": 52,
+      "name_kor": "디템포레",
+      "location": "한남동",
+      "ct_code": "detempore",
+      "ct_name": "De tempore 디템포레",
+      "ct_addr": "서울특별시 용산구 한남대로 37 1층",
+      "exact": true
+    },
+    {
+      "idx": 53,
+      "name_kor": "매튜",
+      "location": "성수동",
+      "ct_code": "mt_restaurant-mingles",
+      "ct_name": "매튜 Matthew.",
+      "ct_addr": "서울 성동구 뚝섬로15길 31 1층 매튜",
+      "exact": true
+    },
+    {
+      "idx": 54,
+      "name_kor": "뮤땅",
+      "location": "한남동",
+      "ct_code": "bistro.mutin",
+      "ct_name": "뮤땅",
+      "ct_addr": "서울특별시 용산구 대사관로12길 4-2 2층",
+      "exact": true
+    },
+    {
+      "idx": 55,
+      "name_kor": "강민철 레스토랑",
+      "location": "청담동",
+      "ct_code": "KANGMINCHUL",
+      "ct_name": "KANG MINCHUL Restaurant",
+      "ct_addr": "서울 강남구 도산대로63길 18 5층",
+      "exact": false
+    },
+    {
+      "idx": 56,
+      "name_kor": "라뽀드",
+      "location": "논현동",
+      "ct_code": "laporte",
+      "ct_name": "라뽀뜨 La porte",
+      "ct_addr": "서울 강남구 선릉로145길 12 2층 라뽀뜨 La porte",
+      "exact": false
+    },
+    {
+      "idx": 57,
+      "name_kor": "무오키",
+      "location": "청담동",
+      "ct_code": "muoki",
+      "ct_name": "무오키",
+      "ct_addr": "서울특별시 강남구 학동로55길 12-12 2층",
+      "exact": true
+    },
+    {
+      "idx": 58,
+      "name_kor": "오니바",
+      "location": "청담동",
+      "ct_code": "onyva",
+      "ct_name": "Onyva",
+      "ct_addr": "서울특별시 강남구 도산대로75길 15 B1층",
+      "exact": false
+    },
+    {
+      "idx": 59,
+      "name_kor": "레스토랑 알렌",
+      "location": "역삼동",
+      "ct_code": "allen",
+      "ct_name": "레스토랑 알렌",
+      "ct_addr": "서울특별시 강남구 테헤란로 231 센터필드 2층",
+      "exact": true
+    },
+    {
+      "idx": 60,
+      "name_kor": "류니끄",
+      "location": "신사동",
+      "ct_code": "ryunique",
+      "ct_name": "류니끄",
+      "ct_addr": "서울특별시 강남구 도산대로45길 8-1 1, 2층",
+      "exact": true
+    },
+    {
+      "idx": 61,
+      "name_kor": "라싸브어",
+      "location": "반포동",
+      "ct_code": "lasaveur",
+      "ct_name": "라싸브어 La Saveur",
+      "ct_addr": "서울특별시 서초구 서래로 24 다솜빌딩 5층",
+      "exact": true
+    },
+    {
+      "idx": 62,
+      "name_kor": "방방",
+      "location": "용산구",
+      "ct_code": "vinvin",
+      "ct_name": "방방",
+      "ct_addr": "서울특별시 용산구 신흥로 99-9 1, 2층",
+      "exact": true
+    },
+    {
+      "idx": 63,
+      "name_kor": "제로 콤플렉스",
+      "location": "용산구",
+      "ct_code": "zerocomplex",
+      "ct_name": "제로 컴플렉스",
+      "ct_addr": "서울특별시 용산구 서빙고로59길 11-8",
+      "exact": false
+    },
+    {
+      "idx": 64,
+      "name_kor": "라브리",
+      "location": "종로구",
+      "ct_code": "labrick_goyang",
+      "ct_name": "라브리크 고양",
+      "ct_addr": "경기도 고양시 덕양구 고양대로 1955 스타필드 고양 1층",
+      "exact": true
+    },
+    {
+      "idx": 65,
+      "name_kor": "빠리가옥",
+      "location": "종로구",
+      "ct_code": "lapero.ikseondong",
+      "ct_name": "빠리가옥",
+      "ct_addr": "서울특별시 종로구 수표로28길 33-4 1층",
+      "exact": true
+    },
+    {
+      "idx": 68,
+      "name_kor": "스미스앤월렌스키",
+      "location": "한남동",
+      "ct_code": "smithnwollensky",
+      "ct_name": "스미스앤월렌스키(Smith and Wollensky)",
+      "ct_addr": "서울특별시 용산구 독서당로 71 (7-8층)",
+      "exact": true
+    },
+    {
+      "idx": 69,
+      "name_kor": "울프강",
+      "location": "청담동",
+      "ct_code": "wolfgangssteakhouse_gwanghwa",
+      "ct_name": "울프강 스테이크하우스 광화문점",
+      "ct_addr": "서울특별시 중구 세종대로21길 40 2층",
+      "exact": true
+    },
+    {
+      "idx": 70,
+      "name_kor": "커스텀잇",
+      "location": "신사동",
+      "ct_code": "customeat",
+      "ct_name": "커스텀잇 스테이크 하우스",
+      "ct_addr": "서울특별시 강남구 압구정로 110 화인빌딩 1층",
+      "exact": true
+    },
+    {
+      "idx": 71,
+      "name_kor": "부첼리하우스",
+      "location": "한남동",
+      "ct_code": "ct0151",
+      "ct_name": "부첼리하우스",
+      "ct_addr": "서울특별시 용산구 독서당로 122-1 포트힐(Fort Hill) 빌딩",
+      "exact": true
+    },
+    {
+      "idx": 72,
+      "name_kor": "구스테이크 528",
+      "location": "신사동",
+      "ct_code": "goostk",
+      "ct_name": "GOO STK 신사점 / GOO STK 528",
+      "ct_addr": "서울특별시 강남구 압구정로 108 덕산빌딩 1층 뒷편",
+      "exact": false
+    },
+    {
+      "idx": 73,
+      "name_kor": "볼트 스테이크하우스",
+      "location": "청담동",
+      "ct_code": "vaultsteakhouse",
+      "ct_name": "볼트 스테이크하우스",
+      "ct_addr": "서울특별시 강남구 압구정로72길 22 2층",
+      "exact": true
+    },
+    {
+      "idx": 74,
+      "name_kor": "부처스컷",
+      "location": "신사동",
+      "ct_code": "butcherscut_ghm",
+      "ct_name": "붓처스컷 광화문점",
+      "ct_addr": "서울특별시 중구 세종대로 136 서울파이낸스센터 지하2층",
+      "exact": false
+    },
+    {
+      "idx": 75,
+      "name_kor": "티식스",
+      "location": "청담동",
+      "ct_code": "t6",
+      "ct_name": "T6 Teppan Bistro",
+      "ct_addr": "서울특별시 강남구 압구정로60길 26 6층",
+      "exact": false
+    },
+    {
+      "idx": 79,
+      "name_kor": "올댓미트돔",
+      "location": "압구정동",
+      "ct_code": "allthatmeat",
+      "ct_name": "올댓미트돔",
+      "ct_addr": "서울특별시 강남구 언주로174길 22 5층",
+      "exact": true
+    },
+    {
+      "idx": 80,
+      "name_kor": "세스타",
+      "location": "한남동",
+      "ct_code": "cesta_seoul",
+      "ct_name": "CESTA 세스타",
+      "ct_addr": "서울특별시 용산구 한남대로20길 21-18 1층",
+      "exact": true
+    },
+    {
+      "idx": 81,
+      "name_kor": "주파카",
+      "location": "한남동",
+      "ct_code": "ibj",
+      "ct_name": "임병주 산동 칼국수",
+      "ct_addr": "서울특별시 서초구 강남대로37길 65 임병주 산동칼국수 2층",
+      "exact": false
+    },
+    {
+      "idx": 82,
+      "name_kor": "플럭스(안티트러스트)",
+      "location": "청담동",
+      "ct_code": "antitrust",
+      "ct_name": "플럭스 (안티트러스트)",
+      "ct_addr": "서울특별시 강남구 선릉로162길 12 마드레스 3층",
+      "exact": true
+    },
+    {
+      "idx": 83,
+      "name_kor": "레에스티우",
+      "location": "용산구",
+      "ct_code": "lestiu",
+      "ct_name": "레에스티우  L’Estiu",
+      "ct_addr": "서울특별시 용산구 대사관로20길 5 1층",
+      "exact": true
+    },
+    {
+      "idx": 84,
+      "name_kor": "비놀로지",
+      "location": "청담동",
+      "ct_code": "vinology_seoul",
+      "ct_name": "비놀로지 VINOLOGY",
+      "ct_addr": "서울특별시 강남구 선릉로148길 14 베리굿빌딩 지하 1층",
+      "exact": true
+    },
+    {
+      "idx": 86,
+      "name_kor": "더즌 오이스터 한남",
+      "location": "한남동",
+      "ct_code": "dozenoyster_hannam",
+      "ct_name": "더즌 오이스터 한남",
+      "ct_addr": "서울특별시 용산구 이태원로54길 63-4 1층",
+      "exact": true
+    },
+    {
+      "idx": 87,
+      "name_kor": "레커",
+      "location": "청담동",
+      "ct_code": "lekker",
+      "ct_name": "레커 LEKKER",
+      "ct_addr": "서울특별시 강남구 선릉로146길 27-10 1층",
+      "exact": true
+    },
+    {
+      "idx": 88,
+      "name_kor": "푸에고",
+      "location": "한남동",
+      "ct_code": "restaurantfuego",
+      "ct_name": "푸에고",
+      "ct_addr": "서울특별시 용산구 유엔빌리지길 14 1층",
+      "exact": true
+    },
+    {
+      "idx": 89,
+      "name_kor": "갓잇 한남점",
+      "location": "한남동",
+      "ct_code": "godeat_hannam",
+      "ct_name": "갓잇 한남점",
+      "ct_addr": "서울특별시 용산구 대사관로 46-1 지하1층 1호",
+      "exact": true
+    },
+    {
+      "idx": 92,
+      "name_kor": "휴135",
+      "location": "한남동",
+      "ct_code": "hue135",
+      "ct_name": "휴135",
+      "ct_addr": "서울특별시 용산구 이태원로55나길 6 오로꾸보 1층",
+      "exact": true
+    },
+    {
+      "idx": 94,
+      "name_kor": "우가",
+      "location": "압구정동",
+      "ct_code": "thewooga",
+      "ct_name": "우가",
+      "ct_addr": "서울특별시 강남구 강남대로 652 신사스퀘어 G층",
+      "exact": true
+    },
+    {
+      "idx": 95,
+      "name_kor": "R고기",
+      "location": "청담동",
+      "ct_code": "Y2F0Y2hfeTdrNjhVVXhFdE1lNG5QWXgrZUlnUT09",
+      "ct_name": "R고기 in Jeju",
+      "ct_addr": "제주특별자치도 제주시 서해안로 153 도두1동다목적마을복지회관",
+      "exact": true
+    },
+    {
+      "idx": 96,
+      "name_kor": "수린",
+      "location": "신사동",
+      "ct_code": "surin",
+      "ct_name": "수린",
+      "ct_addr": "서울특별시 강남구 언주로164길 24 아크로스 빌딩 3층",
+      "exact": true
+    },
+    {
+      "idx": 97,
+      "name_kor": "우텐더",
+      "location": "압구정동",
+      "ct_code": "wootender",
+      "ct_name": "우텐더",
+      "ct_addr": "서울특별시 강남구 압구정로42길 25-10 1층, 2층",
+      "exact": true
+    },
+    {
+      "idx": 100,
+      "name_kor": "텅앤그루브조인트",
+      "location": "이태원",
+      "ct_code": "tongue",
+      "ct_name": "텅앤그루브조인트",
+      "ct_addr": "서울특별시 용산구 보광로60길 7 1층",
+      "exact": true
+    },
+    {
+      "idx": 101,
+      "name_kor": "우미학",
+      "location": "압구정동",
+      "ct_code": "woomihak",
+      "ct_name": "우미학",
+      "ct_addr": "서울특별시 강남구 압구정로30길 51 I.S.A 빌딩 2층",
+      "exact": true
+    },
+    {
+      "idx": 102,
+      "name_kor": "고청담",
+      "location": "광화문",
+      "ct_code": "gocheongdam_yongsan",
+      "ct_name": "고청담 용산점",
+      "ct_addr": "서울특별시 용산구 한강대로 100 아모레퍼시픽 본사 지하1층",
+      "exact": true
+    },
+    {
+      "idx": 103,
+      "name_kor": "스니",
+      "location": "압구정동",
+      "ct_code": "snif",
+      "ct_name": "스니프",
+      "ct_addr": "서울특별시 마포구 도화길 14-3 1층, 2층",
+      "exact": true
+    },
+    {
+      "idx": 104,
+      "name_kor": "핑크솔트 숯불구이",
+      "location": "합정동 ",
+      "ct_code": "pinksalt",
+      "ct_name": "핑크솔트 숯불구이 합정",
+      "ct_addr": "서울특별시 마포구 양화로 16,2~4층",
+      "exact": true
+    },
+    {
+      "idx": 105,
+      "name_kor": "조우",
+      "location": "압구정동",
+      "ct_code": "Y2F0Y2hfNmxGM2d2TE1CT0JyaUFDTHp0WUxOUT09",
+      "ct_name": "조우",
+      "ct_addr": "서울특별시 종로구 경희궁1길 10-1",
+      "exact": true
+    },
+    {
+      "idx": 106,
+      "name_kor": "양인환대극진",
+      "location": "용산구",
+      "ct_code": "yanginhwandaegeugjin",
+      "ct_name": "양인환대 극진",
+      "ct_addr": "서울특별시 용산구 한강대로40길 14 지상1층 104호",
+      "exact": true
+    },
+    {
+      "idx": 107,
+      "name_kor": "우래옥",
+      "location": "주교동",
+      "ct_code": "Y2F0Y2hfc0EvanB2VHpFTGdIeTlaL0dUVkpxdz09",
+      "ct_name": "우래옥",
+      "ct_addr": "서울특별시 중구 창경궁로 62-29 우래옥",
+      "exact": true
+    },
+    {
+      "idx": 109,
+      "name_kor": "금돼지 식당",
+      "location": "약수동",
+      "ct_code": "Goldpig",
+      "ct_name": "금돼지식당",
+      "ct_addr": "서울특별시 중구 다산로 149 1층",
+      "exact": true
+    },
+    {
+      "idx": 110,
+      "name_kor": "남영돈",
+      "location": "용산구",
+      "ct_code": "namyoungdon",
+      "ct_name": "남영돈",
+      "ct_addr": "서울특별시 용산구 한강대로80길 17 1층",
+      "exact": true
+    },
+    {
+      "idx": 111,
+      "name_kor": "남영탉",
+      "location": "용산구",
+      "ct_code": "nychicken",
+      "ct_name": "남영탉",
+      "ct_addr": "서울특별시 용산구 한강대로80길 12 1층",
+      "exact": true
+    },
+    {
+      "idx": 112,
+      "name_kor": "한강수",
+      "location": "도곡",
+      "ct_code": "hangangsuchbulgogi",
+      "ct_name": "한강숯불고기",
+      "ct_addr": "서울특별시 노원구 상계로 98 광복빌딩 1층",
+      "exact": false
+    },
+    {
+      "idx": 113,
+      "name_kor": "삼원가든",
+      "location": "신사동",
+      "ct_code": "samwongarden",
+      "ct_name": "삼원가든",
+      "ct_addr": "서울특별시 강남구 언주로 835 1층",
+      "exact": true
+    },
+    {
+      "idx": 114,
+      "name_kor": "청담우애",
+      "location": "청담동",
+      "ct_code": "WOOAE",
+      "ct_name": "청담우애",
+      "ct_addr": "서울특별시 강남구 도산대로90길 16 Jade49 4층",
+      "exact": true
+    },
+    {
+      "idx": 115,
+      "name_kor": "남산 막창",
+      "location": "보광동",
+      "ct_code": "namsan_makchang",
+      "ct_name": "남산막창",
+      "ct_addr": "서울특별시 용산구 장문로 81 1층",
+      "exact": true
+    },
+    {
+      "idx": 117,
+      "name_kor": "압구정진주 한남점",
+      "location": "한남동",
+      "ct_code": "apgujeongjinju_hannam",
+      "ct_name": "압구정진주 한남점",
+      "ct_addr": "서울특별시 용산구 대사관로30길 11-6",
+      "exact": true
+    },
+    {
+      "idx": 118,
+      "name_kor": "곰바위",
+      "location": "삼성동",
+      "ct_code": "Gombawie",
+      "ct_name": "곰바위 본점",
+      "ct_addr": "서울특별시 강남구 영동대로115길 10",
+      "exact": true
+    },
+    {
+      "idx": 119,
+      "name_kor": "네모집 한남점",
+      "location": "한남동",
+      "ct_code": "Hannam",
+      "ct_name": "네모집 한남점",
+      "ct_addr": "서울특별시 용산구 독서당로 87 1층",
+      "exact": true
+    },
+    {
+      "idx": 123,
+      "name_kor": "라연",
+      "location": "장충동",
+      "ct_code": "layeon.shilla",
+      "ct_name": "서울신라호텔 라연",
+      "ct_addr": "서울특별시 중구 동호로 249 서울신라호텔 23층",
+      "exact": true
+    },
+    {
+      "idx": 124,
+      "name_kor": "온지음",
+      "location": "통의동",
+      "ct_code": "onjiumrestaurant",
+      "ct_name": "온지음",
+      "ct_addr": "서울특별시 종로구 효자로 49 온지음 4층",
+      "exact": true
+    },
+    {
+      "idx": 125,
+      "name_kor": "오늘",
+      "location": "이태원",
+      "ct_code": "onelchobap_beomgye",
+      "ct_name": "오늘초밥 범계점",
+      "ct_addr": "경기도 안양시 동안구 시민대로 190 힐스테이트 범계역 모비우스 117호, 118호",
+      "exact": true
+    },
+    {
+      "idx": 126,
+      "name_kor": "권숙수",
+      "location": "압구정동",
+      "ct_code": "kwonsooksoo",
+      "ct_name": "권숙수",
+      "ct_addr": "서울특별시 강남구 압구정로80길 37 이에스빌딩 4층",
+      "exact": true
+    },
+    {
+      "idx": 127,
+      "name_kor": "정식당",
+      "location": "압구정동",
+      "ct_code": "jungsik",
+      "ct_name": "정식당",
+      "ct_addr": "서울특별시 강남구 선릉로158길 11 2층, 3층",
+      "exact": true
+    },
+    {
+      "idx": 128,
+      "name_kor": "주옥",
+      "location": "소공동",
+      "ct_code": "juog",
+      "ct_name": "주옥",
+      "ct_addr": "서울특별시 성동구 마조로1길 40-1 지하1층",
+      "exact": true
+    },
+    {
+      "idx": 129,
+      "name_kor": "밍글스",
+      "location": "논현동",
+      "ct_code": "mingles",
+      "ct_name": "밍글스",
+      "ct_addr": "서울특별시 강남구 도산대로67길 19 2층",
+      "exact": true
+    },
+    {
+      "idx": 130,
+      "name_kor": "비채나",
+      "location": "잠실",
+      "ct_code": "bicena",
+      "ct_name": "비채나",
+      "ct_addr": "서울특별시 송파구 올림픽로 300 롯데월드타워앤드롯데월드몰 81층",
+      "exact": true
+    },
+    {
+      "idx": 131,
+      "name_kor": "모수",
+      "location": "한남동/이태원",
+      "ct_code": "tempmosuseoul",
+      "ct_name": "모수 서울(Mosu Seoul)",
+      "ct_addr": "서울특별시 용산구 회나무로41길 4",
+      "exact": true
+    },
+    {
+      "idx": 132,
+      "name_kor": "레스토랑 주은",
+      "location": "종로구",
+      "ct_code": "jueun_seoul",
+      "ct_name": "레스토랑 주은",
+      "ct_addr": "서울특별시 종로구 경희궁길 36, 8층",
+      "exact": true
+    },
+    {
+      "idx": 133,
+      "name_kor": "솔밤",
+      "location": "논현동",
+      "ct_code": "solbam_restaurant",
+      "ct_name": "솔밤",
+      "ct_addr": "서울 강남구 학동로 231 2층",
+      "exact": true
+    },
+    {
+      "idx": 134,
+      "name_kor": "엑스퀴진",
+      "location": "청담동",
+      "ct_code": "exquisine_seoul",
+      "ct_name": "익스퀴진",
+      "ct_addr": "서울특별시 강남구 삼성로140길 6 라파빌딩 1층",
+      "exact": false
+    },
+    {
+      "idx": 137,
+      "name_kor": "한우리",
+      "location": "논현동",
+      "ct_code": "hanwooriga",
+      "ct_name": "한우리 가(家)",
+      "ct_addr": "부산광역시 해운대구 중동2로10번길 13 1층",
+      "exact": true
+    },
+    {
+      "idx": 138,
+      "name_kor": "꽃새우 영번지",
+      "location": "역삼동",
+      "ct_code": "Y2F0Y2hfelRFeFovVG1ucVVWZEJNbFRyZ3JSdz09",
+      "ct_name": "꽃새우 영번지",
+      "ct_addr": "서울특별시 강남구 언주로 536",
+      "exact": true
+    },
+    {
+      "idx": 139,
+      "name_kor": "품",
+      "location": "삼성동",
+      "ct_code": "poomseoul",
+      "ct_name": "품 서울",
+      "ct_addr": "서울특별시 강남구 삼성로126길 6 1층",
+      "exact": true
+    },
+    {
+      "idx": 140,
+      "name_kor": "을밀대 강남점",
+      "location": "역삼동",
+      "ct_code": "Y2F0Y2hfdmp1TDIwdVptMEVkbTdESnhKdG5CUT09",
+      "ct_name": "을밀대 강남점",
+      "ct_addr": "서울 강남구 테헤란로4길 46",
+      "exact": true
+    },
+    {
+      "idx": 141,
+      "name_kor": "평양면옥",
+      "location": "논현동",
+      "ct_code": "Y2F0Y2hfK1NScENQcCtWQlRIaTVKa21mV3NxUT09",
+      "ct_name": "평양면옥",
+      "ct_addr": "서울특별시 중구 장충단로 207",
+      "exact": true
+    },
+    {
+      "idx": 142,
+      "name_kor": "우래옥",
+      "location": "종로",
+      "ct_code": "Y2F0Y2hfc0EvanB2VHpFTGdIeTlaL0dUVkpxdz09",
+      "ct_name": "우래옥",
+      "ct_addr": "서울특별시 중구 창경궁로 62-29 우래옥",
+      "exact": true
+    },
+    {
+      "idx": 143,
+      "name_kor": "한남북엇국",
+      "location": "한남동",
+      "ct_code": "Y2F0Y2hfc3ZqYXVOM1NqZW9PaldwWFJpSlM4UT09",
+      "ct_name": "한남북엇국 청담점",
+      "ct_addr": "서울특별시 강남구 삼성로149길 27 1층",
+      "exact": true
+    },
+    {
+      "idx": 144,
+      "name_kor": "개화옥",
+      "location": "신사동",
+      "ct_code": "gaewhaok",
+      "ct_name": "개화옥",
+      "ct_addr": "서울특별시 강남구 압구정로50길 7 정동상가 1층 107호",
+      "exact": true
+    },
+    {
+      "idx": 145,
+      "name_kor": "모이",
+      "location": "한남동",
+      "ct_code": "sseummoigadeun_songjeong",
+      "ct_name": "씀모이가든 송정점",
+      "ct_addr": "부산광역시 해운대구 송정광어골로 88 씀모이가든 송정점",
+      "exact": true
+    },
+    {
+      "idx": 146,
+      "name_kor": "석파랑",
+      "location": "홍지동",
+      "ct_code": "Y2F0Y2hfQnRpUkhaKzFKZ2ZhQjZYa0htSFRwZz09",
+      "ct_name": "석파랑",
+      "ct_addr": "서울특별시 종로구 자하문로 309",
+      "exact": true
+    },
+    {
+      "idx": 147,
+      "name_kor": "소설 한남",
+      "location": "한남동",
+      "ct_code": "soseoul_hannam",
+      "ct_name": "소설한남",
+      "ct_addr": "서울특별시 용산구 한남대로20길 21-18 지하 1층",
+      "exact": true
+    },
+    {
+      "idx": 148,
+      "name_kor": "백년옥",
+      "location": "서초동",
+      "ct_code": "Y2F0Y2hfNXVucE5BeVJxWHQzWXhaL09ZaVFldz09",
+      "ct_name": "백년옥",
+      "ct_addr": "서울특별시 서초구 남부순환로 2407",
+      "exact": true
+    },
+    {
+      "idx": 149,
+      "name_kor": "옳음",
+      "location": "청담동",
+      "ct_code": "olheum",
+      "ct_name": "옳음 OLH EUM",
+      "ct_addr": "서울 강남구 도산대로100길 24",
+      "exact": true
+    },
+    {
+      "idx": 150,
+      "name_kor": "도슬박",
+      "location": "신사동",
+      "ct_code": "doseulbak",
+      "ct_name": "도슬박",
+      "ct_addr": "서울특별시 강남구 압구정로42길 25-3 KH빌딩 1층",
+      "exact": true
+    },
+    {
+      "idx": 151,
+      "name_kor": "한성칼국수",
+      "location": "논현동",
+      "ct_code": "hanseongkalgugsu",
+      "ct_name": "한성칼국수",
+      "ct_addr": "경기도 과천시 중앙로 525 한성칼국수",
+      "exact": true
+    },
+    {
+      "idx": 152,
+      "name_kor": "코자차",
+      "location": "삼성동",
+      "ct_code": "kojacha",
+      "ct_name": "코자차 kojacha",
+      "ct_addr": "서울특별시 강남구 학동로97길 17 1층",
+      "exact": true
+    },
+    {
+      "idx": 153,
+      "name_kor": "박성희가 요리하는 집",
+      "location": "신사동",
+      "ct_code": "Y2F0Y2hfazNKZklMSlV1NWJqTUZobytRYzExZz09",
+      "ct_name": "박성희가요리하는집",
+      "ct_addr": "서울 강남구 학동로1길 22",
+      "exact": true
+    },
+    {
+      "idx": 154,
+      "name_kor": "묵정",
+      "location": "묵정동",
+      "ct_code": "mukjung",
+      "ct_name": "묵정 ",
+      "ct_addr": "서울특별시 중구 퇴계로48길 17 1층",
+      "exact": true
+    },
+    {
+      "idx": 155,
+      "name_kor": "단비",
+      "location": "한남동",
+      "ct_code": "danbiju",
+      "ct_name": "단비주",
+      "ct_addr": "경기도 구리시 벌말로147번길 42 1층",
+      "exact": true
+    },
+    {
+      "idx": 157,
+      "name_kor": "공기",
+      "location": "이태원",
+      "ct_code": "gonggi",
+      "ct_name": "공기 : Gongi 한남동 본점",
+      "ct_addr": "서울특별시 용산구 이태원로45길 4 1층,2층",
+      "exact": true
+    },
+    {
+      "idx": 158,
+      "name_kor": "유림면",
+      "location": "서소문동",
+      "ct_code": "Y2F0Y2hfZE9rVkdMYllaUE4yVVVGbkErcnUzUT09",
+      "ct_name": "유림면",
+      "ct_addr": "서울특별시 중구 서소문로 139-1",
+      "exact": true
+    },
+    {
+      "idx": 159,
+      "name_kor": "필동면옥",
+      "location": "필동",
+      "ct_code": "pildongmo",
+      "ct_name": "필동면옥",
+      "ct_addr": "서울특별시 중구 서애로 26",
+      "exact": true
+    },
+    {
+      "idx": 160,
+      "name_kor": "서령",
+      "location": "서울역",
+      "ct_code": "seoryung",
+      "ct_name": "서령",
+      "ct_addr": "서울특별시 중구 소월로 10 단암빌딩 1층(스타벅스 옆)",
+      "exact": true
+    },
+    {
+      "idx": 161,
+      "name_kor": "진미평양냉면",
+      "location": "논현동",
+      "ct_code": "Y2F0Y2hfVHZhNjEvOVdFQUo1ZjV2NjkvTy8zUT09",
+      "ct_name": "진미평양냉면",
+      "ct_addr": "서울특별시 강남구 학동로 305-3",
+      "exact": true
+    },
+    {
+      "idx": 164,
+      "name_kor": "아리아케",
+      "location": "장충동",
+      "ct_code": "ak.ariake",
+      "ct_name": "서울신라호텔 아리아께",
+      "ct_addr": "서울특별시 중구 동호로 249 2층",
+      "exact": false
+    },
+    {
+      "idx": 165,
+      "name_kor": "스시시미즈",
+      "location": "압구정동",
+      "ct_code": "shimizu",
+      "ct_name": "스시 시미즈",
+      "ct_addr": "서울특별시 강남구 언주로152길 11-3 지하1층",
+      "exact": true
+    },
+    {
+      "idx": 166,
+      "name_kor": "스시코우지",
+      "location": "압구정동",
+      "ct_code": "sushikoji",
+      "ct_name": "스시코우지",
+      "ct_addr": "서울특별시 강남구 도산대로 318 SB타워 어넥스B동 3층",
+      "exact": true
+    },
+    {
+      "idx": 167,
+      "name_kor": "스시선수",
+      "location": "압구정동",
+      "ct_code": "sushi_sunsoo",
+      "ct_name": "스시선수",
+      "ct_addr": "서울특별시 강남구 도산대로45길 6 호림아트센터 2빌딩 M층",
+      "exact": true
+    },
+    {
+      "idx": 168,
+      "name_kor": "스시인",
+      "location": "압구정동",
+      "ct_code": "fotmql",
+      "ct_name": "스시인우",
+      "ct_addr": "대전광역시 유성구 계룡로 92 유성CJ나인파크",
+      "exact": true
+    },
+    {
+      "idx": 169,
+      "name_kor": "스시코지마",
+      "location": "청담동",
+      "ct_code": "sushi_robda",
+      "ct_name": "스시롭다",
+      "ct_addr": "서울특별시 강남구 학동로2길 49",
+      "exact": false
+    },
+    {
+      "idx": 170,
+      "name_kor": "스시스미레",
+      "location": "청담동",
+      "ct_code": "smire",
+      "ct_name": "스시스미레",
+      "ct_addr": "서울특별시 강남구 도산대로55길 18 4층",
+      "exact": true
+    },
+    {
+      "idx": 171,
+      "name_kor": "스시 타쿠미곤",
+      "location": "청담동",
+      "ct_code": "rakuchin",
+      "ct_name": "라쿠친스시",
+      "ct_addr": "대구광역시 수성구 범어로24길 10",
+      "exact": false
+    },
+    {
+      "idx": 172,
+      "name_kor": "스시 쿠루미",
+      "location": "청담동",
+      "ct_code": "sushikurumikr",
+      "ct_name": "스시쿠루미",
+      "ct_addr": "서울특별시 강남구 선릉로146길 33 Block 2층",
+      "exact": true
+    },
+    {
+      "idx": 173,
+      "name_kor": "스시 마츠모토",
+      "location": "청담동",
+      "ct_code": "sushi_matsumoto",
+      "ct_name": "스시마츠모토",
+      "ct_addr": "서울특별시 강남구 도산대로75길 24 1층",
+      "exact": true
+    },
+    {
+      "idx": 174,
+      "name_kor": "스시카나에",
+      "location": "청담동",
+      "ct_code": "sushi_kanae",
+      "ct_name": "스시카나에",
+      "ct_addr": "서울특별시 강남구 도산대로75길 15 2층",
+      "exact": true
+    },
+    {
+      "idx": 175,
+      "name_kor": "스시노아야",
+      "location": "한남동",
+      "ct_code": "sushinoaya",
+      "ct_name": "스시 노 아야",
+      "ct_addr": "서울 강남구 압구정로79길 19",
+      "exact": true
+    },
+    {
+      "idx": 176,
+      "name_kor": "스시야",
+      "location": "분당",
+      "ct_code": "bundangsushiya",
+      "ct_name": "스시야",
+      "ct_addr": "경기도 성남시 분당구 정자일로 146 엠코헤리츠 1단지 2층",
+      "exact": true
+    },
+    {
+      "idx": 177,
+      "name_kor": "스시야 도산대로점",
+      "location": "신사동",
+      "ct_code": "sushiyadosandaero",
+      "ct_name": "스시야 도산대로점",
+      "ct_addr": "서울특별시 강남구 도산대로 150 2층",
+      "exact": true
+    },
+    {
+      "idx": 178,
+      "name_kor": "스시정대",
+      "location": "청담동",
+      "ct_code": "jungdaeseoul",
+      "ct_name": "정대 JUNGDAE",
+      "ct_addr": "서울특별시 강남구 도산대로 501 1층 102호 (청담동)",
+      "exact": false
+    },
+    {
+      "idx": 179,
+      "name_kor": "스시사이토 쥬욘",
+      "location": "청담동",
+      "ct_code": "sushisaito_juyon",
+      "ct_name": "스시사이토 쥬욘",
+      "ct_addr": "서울특별시 강남구 압구정로75길 30 2층",
+      "exact": true
+    },
+    {
+      "idx": 180,
+      "name_kor": "하네",
+      "location": "압구정동",
+      "ct_code": "Y2F0Y2hfcS9OcHlRRDdvQXZXQlZvZGJ4SnJOQT09",
+      "ct_name": "하네",
+      "ct_addr": "서울특별시 강남구 언주로172길 14 1층 하네",
+      "exact": true
+    },
+    {
+      "idx": 181,
+      "name_kor": "소수헌",
+      "location": "서울역/마포",
+      "ct_code": "sosuheon",
+      "ct_name": "소수헌",
+      "ct_addr": "서울특별시 중구 만리재로21길 8 소수헌빌딩",
+      "exact": true
+    },
+    {
+      "idx": 182,
+      "name_kor": "스시의미",
+      "location": "한남동",
+      "ct_code": "seoomlze",
+      "ct_name": "스시 시오미즈",
+      "ct_addr": "경기도 하남시 미사강변동로 95 힐스테이트 미사역 그랑파사쥬(12-1BL) 12-1BL 2층 2094호",
+      "exact": false
+    },
+    {
+      "idx": 183,
+      "name_kor": "스시소우",
+      "location": "압구정동",
+      "ct_code": "sushi_soukai",
+      "ct_name": "스시 소우카이",
+      "ct_addr": "서울특별시 중구 동호로35길 5 석광빌딩 지하1층",
+      "exact": true
+    },
+    {
+      "idx": 186,
+      "name_kor": "무라사키",
+      "location": "압구정동",
+      "ct_code": "murasaki",
+      "ct_name": "무라사키 사케다이닝 바(murasaki sake dining bar)",
+      "ct_addr": "부산광역시 수영구 민락수변로17번길 36 타워더모스트 광안 2층",
+      "exact": true
+    },
+    {
+      "idx": 187,
+      "name_kor": "오무라안",
+      "location": "역삼동",
+      "ct_code": "Y2F0Y2hfUWRyM0ZZcTE1SCtjdmdvMTV6YmhnQT09",
+      "ct_name": "오무라안",
+      "ct_addr": "서울특별시 강남구 논현로79길 66",
+      "exact": true
+    },
+    {
+      "idx": 188,
+      "name_kor": "스바루",
+      "location": "방배동",
+      "ct_code": "Y2F0Y2hfdC9paGR6Yms1M05tTWh1cGhHTk9jZz09",
+      "ct_name": "스바루",
+      "ct_addr": "서울특별시 서초구 방배중앙로21길 7 우승빌딩 1층 스바루",
+      "exact": true
+    },
+    {
+      "idx": 189,
+      "name_kor": "미나미",
+      "location": "서초동",
+      "ct_code": "sobaminami",
+      "ct_name": "미나미 서초점",
+      "ct_addr": "서울특별시 서초구 서초대로58길 31-2 1층",
+      "exact": true
+    },
+    {
+      "idx": 190,
+      "name_kor": "갓포아키 도산공원점",
+      "location": "신사동",
+      "ct_code": "kappoakiids",
+      "ct_name": "갓포아키 도산공원점",
+      "ct_addr": "서울특별시 강남구 도산대로45길 8-3 쿠키빌딩 2층",
+      "exact": true
+    },
+    {
+      "idx": 192,
+      "name_kor": "신정",
+      "location": "세곡동",
+      "ct_code": "kijuizakaya",
+      "ct_name": "키주 신정점",
+      "ct_addr": "서울 양천구 중앙로36길 15 상가2동 101호",
+      "exact": true
+    },
+    {
+      "idx": 193,
+      "name_kor": "로바타 라이브라",
+      "location": "청담동",
+      "ct_code": "robata_libra",
+      "ct_name": "로바타 라이브라 카운터",
+      "ct_addr": "서울특별시 강남구 선릉로148길 52 1층",
+      "exact": true
+    },
+    {
+      "idx": 195,
+      "name_kor": "마루심",
+      "location": "반포동 ",
+      "ct_code": "marusim_seocho",
+      "ct_name": "마루심 서초",
+      "ct_addr": "서울특별시 서초구 고무래로10길 10 청구빌딩 1층",
+      "exact": true
+    },
+    {
+      "idx": 197,
+      "name_kor": "네기 다이닝라운지",
+      "location": "신사동",
+      "ct_code": "negitong",
+      "ct_name": "네기다이닝라운지",
+      "ct_addr": "서울특별시 강남구 도산대로15길 18 4층 네기",
+      "exact": true
+    },
+    {
+      "idx": 198,
+      "name_kor": "쥬안",
+      "location": "청담동",
+      "ct_code": "juan",
+      "ct_name": "쥬안",
+      "ct_addr": "서울특별시 강남구 도산대로75길 24 2층",
+      "exact": true
+    },
+    {
+      "idx": 199,
+      "name_kor": "키겐 (스키야키)",
+      "location": "청담동",
+      "ct_code": "dha63855",
+      "ct_name": "스키야키 키겐",
+      "ct_addr": "서울특별시 강남구 언주로150길 51 지하1층",
+      "exact": false
+    },
+    {
+      "idx": 200,
+      "name_kor": "고료리 켄",
+      "location": "신사동",
+      "ct_code": "goryori_ken",
+      "ct_name": "고료리 켄",
+      "ct_addr": "서울특별시 강남구 언주로152길 15-3 2층",
+      "exact": true
+    },
+    {
+      "idx": 201,
+      "name_kor": "두사라 청담",
+      "location": "청담동",
+      "ct_code": "dusaracd",
+      "ct_name": "두사라 청담점",
+      "ct_addr": "서울특별시 강남구 선릉로162길 52 1층",
+      "exact": true
+    },
+    {
+      "idx": 202,
+      "name_kor": "모던샤브하우스",
+      "location": "광화문",
+      "ct_code": "msh_jamsil",
+      "ct_name": "모던샤브하우스 잠실점",
+      "ct_addr": "서울특별시 송파구 잠실로 209 KT송파타워 호텔동 2층",
+      "exact": true
+    },
+    {
+      "idx": 203,
+      "name_kor": "스미카",
+      "location": "신사동",
+      "ct_code": "sumika_ulsan",
+      "ct_name": "스미카",
+      "ct_addr": "울산광역시 남구 왕생로20번길 7-1",
+      "exact": true
+    },
+    {
+      "idx": 204,
+      "name_kor": "미오",
+      "location": "잠실",
+      "ct_code": "mio_",
+      "ct_name": "미오",
+      "ct_addr": "서울특별시 송파구 위례성대로12길 28 광림빌딩 1층 미오",
+      "exact": true
+    },
+    {
+      "idx": 206,
+      "name_kor": "청담로바",
+      "location": "청담동",
+      "ct_code": "Y2F0Y2hfYWVIYmd5OXdiRXFqQlNBSjU5UCtaZz09",
+      "ct_name": "청담로바",
+      "ct_addr": "서울특별시 강남구 도산대로 420 청담스퀘어 타워빌딩 B동 2층 221호",
+      "exact": true
+    },
+    {
+      "idx": 207,
+      "name_kor": "야마부키",
+      "location": "장충동",
+      "ct_code": "yamabuki",
+      "ct_name": "야마부키(YAMABUKI)",
+      "ct_addr": "서울 중구 장충단로 180 신세계 남산 지하 1층 야마부키",
+      "exact": true
+    },
+    {
+      "idx": 208,
+      "name_kor": "청담 긴자블루",
+      "location": "청담동",
+      "ct_code": "Y2F0Y2hfZTBPL0lDK0VTMklqTmtpd0g3S0oxdz09",
+      "ct_name": "청담 긴자블루 ",
+      "ct_addr": "서울특별시 강남구 도산대로 420 청담스퀘어 B동 3층 321,322호",
+      "exact": true
+    },
+    {
+      "idx": 209,
+      "name_kor": "키사라",
+      "location": "여의도",
+      "ct_code": "kisara_yeouido",
+      "ct_name": "키사라 여의도점",
+      "ct_addr": "서울특별시 영등포구 여의대로 128 LG트윈타워 동관 5층",
+      "exact": true
+    },
+    {
+      "idx": 210,
+      "name_kor": "이쯔모",
+      "location": "한남동",
+      "ct_code": "itsumo",
+      "ct_name": "이츠모",
+      "ct_addr": "광주광역시 광산구 수완로12번길 48 1층",
+      "exact": false
+    },
+    {
+      "idx": 211,
+      "name_kor": "미토우",
+      "location": "청담동",
+      "ct_code": "mitou",
+      "ct_name": "미토우",
+      "ct_addr": "서울특별시 강남구 도산대로70길 24 1층 미토우",
+      "exact": true
+    },
+    {
+      "idx": 214,
+      "name_kor": "더 라운드 (청담)",
+      "location": "청담동",
+      "ct_code": "theround",
+      "ct_name": "The Round 청담점",
+      "ct_addr": "서울특별시 강남구 선릉로148길 37 지하1, 지상1,2층",
+      "exact": false
+    },
+    {
+      "idx": 215,
+      "name_kor": "더 라운드 (삼성)",
+      "location": "삼성동",
+      "ct_code": "Y2F0Y2hfYzd0azZuUUtuakRvd0ttSjBuRGsxUT09",
+      "ct_name": "더라운드 삼성점",
+      "ct_addr": "서울특별시 강남구 영동대로 648 삼안빌딩 1층",
+      "exact": false
+    },
+    {
+      "idx": 216,
+      "name_kor": "더 라운드 (한남)",
+      "location": "한남동",
+      "ct_code": "theround_hannam",
+      "ct_name": "더라운드 한남",
+      "ct_addr": "서울특별시 용산구 독서당로 124 엘 플레이스 한남 2층",
+      "exact": false
+    },
+    {
+      "idx": 217,
+      "name_kor": "팔레드신",
+      "location": "회현동",
+      "ct_code": "Palais_De_Chine_Busan",
+      "ct_name": "그랜드조선부산 팔레드 신",
+      "ct_addr": "부산광역시 해운대구 해운대해변로 292 그랜드 조선 부산 5층",
+      "exact": true
+    },
+    {
+      "idx": 218,
+      "name_kor": "모던눌랑 잠실점",
+      "location": "잠실",
+      "ct_code": "mn_live",
+      "ct_name": "모던눌랑 잠실점",
+      "ct_addr": "서울특별시 송파구 잠실로 209 KT송파타워 호텔동 지하1층",
+      "exact": true
+    },
+    {
+      "idx": 219,
+      "name_kor": "모던눌랑 센트럴시티점",
+      "location": "반포동",
+      "ct_code": "mn_centralcity",
+      "ct_name": "모던눌랑 센트럴시티점",
+      "ct_addr": "서울특별시 서초구 사평대로 205 CENTRALCITY 반포천 복개주차장 1층",
+      "exact": true
+    },
+    {
+      "idx": 220,
+      "name_kor": "쥬에",
+      "location": "한남동",
+      "ct_code": "jue_seoul",
+      "ct_name": "쥬에",
+      "ct_addr": "서울특별시 용산구 독서당로 124-7 쥬에",
+      "exact": true
+    },
+    {
+      "idx": 221,
+      "name_kor": "수녹",
+      "location": "압구정동",
+      "ct_code": "sunuk",
+      "ct_name": "중식당 수녹",
+      "ct_addr": "서울특별시 강남구 도산대로 317 호림아트센터 1빌딩 M층 지하1층 2호",
+      "exact": true
+    },
+    {
+      "idx": 223,
+      "name_kor": "덕후선생 광화문D타워점",
+      "location": "광화문",
+      "ct_code": "generousduckoo_dtower",
+      "ct_name": "덕후선생 광화문 D타워점",
+      "ct_addr": "서울특별시 종로구 종로3길 17 D타워  4층",
+      "exact": true
+    },
+    {
+      "idx": 224,
+      "name_kor": "덕후선생 판교점",
+      "location": "판교",
+      "ct_code": "generousduckoo_pangyo",
+      "ct_name": "덕후선생 판교점",
+      "ct_addr": "경기도 성남시 분당구 동판교로177번길 25 판교 호반 써밋 플레이스",
+      "exact": true
+    },
+    {
+      "idx": 225,
+      "name_kor": "팀호완 삼성점",
+      "location": "삼성동",
+      "ct_code": "Y2F0Y2hfOWFwQk9hNG8zNURXbkdhQTBkRzR1Zz09",
+      "ct_name": "팀호완 삼성점",
+      "ct_addr": "서울특별시 강남구 봉은사로86길 30 1층",
+      "exact": true
+    },
+    {
+      "idx": 226,
+      "name_kor": "쮸즈",
+      "location": "신사동",
+      "ct_code": "jjuzz",
+      "ct_name": "쮸즈",
+      "ct_addr": "서울특별시 강남구 도산대로17길 13",
+      "exact": true
+    },
+    {
+      "idx": 228,
+      "name_kor": "모트32",
+      "location": "반포동",
+      "ct_code": "mott32",
+      "ct_name": "MOTT 32 SEOUL",
+      "ct_addr": "서울특별시 서초구 신반포로 176 센트럴시티 단독건물 2층",
+      "exact": false
+    },
+    {
+      "idx": 229,
+      "name_kor": "가담",
+      "location": "압구정동",
+      "ct_code": "gadam_apgujeong",
+      "ct_name": "가담",
+      "ct_addr": "서울특별시 강남구 언주로167길 35",
+      "exact": true
+    },
+    {
+      "idx": 230,
+      "name_kor": "보보식당",
+      "location": "신사동",
+      "ct_code": "bobo",
+      "ct_name": "보보식당",
+      "ct_addr": "서울특별시 강남구 언주로174길 30 로빈명품관 1층 103호",
+      "exact": true
+    },
+    {
+      "idx": 231,
+      "name_kor": "하카",
+      "location": "압구정동",
+      "ct_code": "HAKKA",
+      "ct_name": "하카 (HAKKA)",
+      "ct_addr": "서울특별시 강남구 도산대로49길 6-10 1층",
+      "exact": true
+    },
+    {
+      "idx": 232,
+      "name_kor": "홍명",
+      "location": "논현동",
+      "ct_code": "Y2F0Y2hfN1FEM1NGUlhPdWV3cW5DQyszWTFVUT09",
+      "ct_name": "홍명",
+      "ct_addr": "서울특별시 강남구 논현로131길 10",
+      "exact": true
+    },
+    {
+      "idx": 233,
+      "name_kor": "홍보각",
+      "location": "역삼동",
+      "ct_code": "hongbogak",
+      "ct_name": "홍보각",
+      "ct_addr": "서울특별시 강남구 봉은사로 130 노보텔 앰배서더 강남 서울 LL층",
+      "exact": true
+    },
+    {
+      "idx": 234,
+      "name_kor": "제제",
+      "location": "성수동",
+      "ct_code": "jeje",
+      "ct_name": "제제",
+      "ct_addr": "서울특별시 성동구 서울숲길 46-1 1층",
+      "exact": true
+    },
+    {
+      "idx": 235,
+      "name_kor": "진진",
+      "location": "합정동",
+      "ct_code": "jinjin",
+      "ct_name": "진진 ",
+      "ct_addr": "서울특별시 마포구 월드컵북로1길 60 1층 진진",
+      "exact": true
+    },
+    {
+      "idx": 236,
+      "name_kor": "청 한남점",
+      "location": "한남동",
+      "ct_code": "eomuljeonchunghannam",
+      "ct_name": "어물전 청 한남점",
+      "ct_addr": "서울특별시 용산구 한남대로 104 H104 2층",
+      "exact": true
+    },
+    {
+      "idx": 237,
+      "name_kor": "성덕",
+      "location": "청담동",
+      "ct_code": "sungdeok",
+      "ct_name": "성덕",
+      "ct_addr": "서울특별시 서초구 서초중앙로 38 정원빌딩",
+      "exact": true
+    },
+    {
+      "idx": 238,
+      "name_kor": "홍연",
+      "location": "소공동",
+      "ct_code": "hongyeon",
+      "ct_name": "웨스틴조선서울 홍연",
+      "ct_addr": "서울특별시 중구 소공로 106 서울 웨스틴조선호텔 LL층",
+      "exact": true
+    },
+    {
+      "idx": 239,
+      "name_kor": "팔선",
+      "location": "장충동",
+      "ct_code": "palsun.sun",
+      "ct_name": "서울신라호텔 팔선",
+      "ct_addr": "서울특별시 중구 동호로 249 2층",
+      "exact": true
+    },
+    {
+      "idx": 241,
+      "name_kor": "웨이루",
+      "location": "삼성동",
+      "ct_code": "WeiLou",
+      "ct_name": "그랜드 인터컨티넨탈 서울 파르나스 웨이루",
+      "ct_addr": "서울특별시 강남구 테헤란로 521 파르나스타워 34층",
+      "exact": true
+    },
+    {
+      "idx": 242,
+      "name_kor": "유유안",
+      "location": "광화문",
+      "ct_code": "yuyuan",
+      "ct_name": "포시즌스 호텔 서울 유유안",
+      "ct_addr": "서울특별시 종로구 새문안로 97 11층",
+      "exact": true
+    },
+    {
+      "idx": 243,
+      "name_kor": "회빈",
+      "location": "논현동",
+      "ct_code": "hoebin",
+      "ct_name": "회빈",
+      "ct_addr": "서울 강남구 봉은사로 156 17층 회빈 중식당",
+      "exact": true
+    },
+    {
+      "idx": 246,
+      "name_kor": "인디카",
+      "location": "한남동",
+      "ct_code": "indica_hannam",
+      "ct_name": "INDICA 인디카",
+      "ct_addr": "서울 용산구 한남대로20길 47-24 B1 ",
+      "exact": true
+    },
+    {
+      "idx": 248,
+      "name_kor": "마나오",
+      "location": "한남동",
+      "ct_code": "manao",
+      "ct_name": "마나오",
+      "ct_addr": "서울특별시 용산구 한남대로21길 18 2층",
+      "exact": true
+    },
+    {
+      "idx": 250,
+      "name_kor": "테이블포포",
+      "location": "한남동",
+      "ct_code": "tableforfour",
+      "ct_name": "테이블포포",
+      "ct_addr": "서울특별시 용산구 대사관로31길 25-12 5층",
+      "exact": true
+    }
+  ],
+  "no_matches": [
+    {
+      "idx": 31,
+      "name_kor": "라틀리에 드 오로조",
+      "location": "한남동"
+    },
+    {
+      "idx": 45,
+      "name_kor": "셰 로랑",
+      "location": "이태원"
+    },
+    {
+      "idx": 49,
+      "name_kor": "꼼모아 해방촌",
+      "location": "용산구"
+    },
+    {
+      "idx": 50,
+      "name_kor": "꼼모아 청담동",
+      "location": "청담동"
+    },
+    {
+      "idx": 78,
+      "name_kor": "펄쉘 청담",
+      "location": "청담동"
+    },
+    {
+      "idx": 85,
+      "name_kor": "도츠",
+      "location": "한남동"
+    },
+    {
+      "idx": 93,
+      "name_kor": "소꿉 청담",
+      "location": "청당동"
+    },
+    {
+      "idx": 98,
+      "name_kor": "유엔가든 중원 역삼점",
+      "location": "역삼동"
+    },
+    {
+      "idx": 99,
+      "name_kor": "유엔가든 판교",
+      "location": "판교"
+    },
+    {
+      "idx": 108,
+      "name_kor": "다온바이뱀부",
+      "location": "논현동"
+    },
+    {
+      "idx": 116,
+      "name_kor": "압구정진주 압구정점",
+      "location": "압구정동"
+    },
+    {
+      "idx": 120,
+      "name_kor": "마포원조소금구이 도산점",
+      "location": "압구정동"
+    },
+    {
+      "idx": 156,
+      "name_kor": "경운산 한남점",
+      "location": "한남동"
+    },
+    {
+      "idx": 191,
+      "name_kor": "진상 서초본점",
+      "location": "강남역"
+    },
+    {
+      "idx": 194,
+      "name_kor": "갓포로바",
+      "location": "청담동"
+    },
+    {
+      "idx": 196,
+      "name_kor": "비스트로 카덴",
+      "location": "연희동"
+    },
+    {
+      "idx": 205,
+      "name_kor": "미나미 하나레",
+      "location": "신사동"
+    },
+    {
+      "idx": 222,
+      "name_kor": "청담레드하우스",
+      "location": "청담동"
+    },
+    {
+      "idx": 227,
+      "name_kor": "레드문 한남",
+      "location": "한남동"
+    },
+    {
+      "idx": 240,
+      "name_kor": "하오빈(호빈)",
+      "location": "장충동"
+    }
+  ]
+}
