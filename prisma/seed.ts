@@ -134,10 +134,13 @@ async function main() {
     console.log("⚠️ catchtable_matches.json 없음 — 매칭 없이 진행");
   }
 
-  // 매칭 데이터를 idx 기준 맵으로
-  const ctMap = new Map<number, CatchtableMatch>();
+  // 매칭 데이터를 식당명(name_kor) 기준 맵으로
+  // ⚠️ idx 기준은 catchtable_matches.json의 idx가 엑셀 행과 어긋나 있어(175건 밀림)
+  //    식당명으로 매칭해야 정확함. 공백 차이 흡수 위해 정규화 키 사용.
+  const nameKey = (s: string) => (s || "").replace(/\s+/g, "").trim();
+  const ctMap = new Map<string, CatchtableMatch>();
   for (const m of ctMatches) {
-    ctMap.set(m.idx, m);
+    ctMap.set(nameKey(m.name_kor), m);
   }
 
   // 3. DB 초기화
@@ -151,7 +154,6 @@ async function main() {
   let loaded = 0;
   for (let i = 0; i < dataRows.length; i++) {
     const row = dataRows[i];
-    const idx = i + 1;
     const nameKor = String(row[1] || "").trim();
     const nameEng = String(row[2] || "").trim() || null;
     const locationRaw = String(row[3] || "").trim();
@@ -166,7 +168,7 @@ async function main() {
     const categoryNorm = normalizeCategory(categoryRaw);
     const { publicDesc, hours, internalMemo } = parseMemo(memo);
 
-    const ctMatch = ctMap.get(idx);
+    const ctMatch = ctMap.get(nameKey(nameKor));
 
     await prisma.restaurant.create({
       data: {
