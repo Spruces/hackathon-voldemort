@@ -30,6 +30,7 @@ env/
 *.pem
 *.key
 secrets.json
+.catchtable-cookies.json
 
 # === 에디터/IDE ===
 .vscode/

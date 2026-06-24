@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { getRole } from "@/lib/session";
-import { getDaySlots } from "@/lib/catchtable";
+
+interface TimeSlotInfo {
+  time: string;
+  available: boolean;
+}
 
 export async function GET(request: NextRequest) {
   const role = await getRole();
@@ -14,94 +18,93 @@ export async function GET(request: NextRequest) {
   const persons = searchParams.get("persons")
     ? parseInt(searchParams.get("persons")!)
     : undefined;
+  const meal = searchParams.get("meal"); // "lunch" | "dinner" | null
 
   if (!date) {
     return NextResponse.json({ error: "date 필수" }, { status: 400 });
   }
 
-  const restaurants = await prisma.restaurant.findMany({
-    where: { catchtableMatched: true },
-    select: {
-      id: true,
-      catchtableAlias: true,
-      daySlots: {
-        where: { date },
+  try {
+    const daySlots = await prisma.daySlotCache.findMany({
+      where: { date },
+      select: {
+        restaurantId: true,
+        availableStatus: true,
+        availablePersons: true,
+        benefit: true,
       },
-    },
-  });
+    });
 
-  const now = Date.now();
-  const TTL_MS = 30 * 60 * 1000; // 30분
+    const results: Array<{
+      restaurantId: number;
+      available: boolean;
+      personCounts: number[];
+      timeSlots: TimeSlotInfo[] | null;
+      availableTimes: string[];
+    }> = [];
 
-  const results: Array<{
-    restaurantId: number;
-    available: boolean;
-    personCounts: number[];
-    benefit: string | null;
-  }> = [];
-
-  for (const r of restaurants) {
-    if (!r.catchtableAlias) continue;
-
-    const cached = r.daySlots[0];
-    const cacheValid =
-      cached && now - new Date(cached.fetchedAt).getTime() < TTL_MS;
-
-    if (cacheValid) {
-      const available = cached.availableStatus === "AVAILABLE";
+    for (const cached of daySlots) {
+      const isAvailable = cached.availableStatus === "AVAILABLE";
       const personCounts = cached.availablePersons
         ? JSON.parse(cached.availablePersons)
         : [];
 
-      if (persons && !personCounts.includes(persons)) {
-        results.push({ restaurantId: r.id, available: false, personCounts, benefit: cached.benefit });
-      } else {
-        results.push({ restaurantId: r.id, available, personCounts, benefit: cached.benefit });
-      }
-    } else {
-      // 캐시 만료 → 실시간 조회
-      try {
-        const slots = getDaySlots(r.catchtableAlias);
-        const slot = slots.find((s) => s.date === date);
+      let timeSlots: TimeSlotInfo[] | null = null;
+      let availableTimes: string[] = [];
 
-        // 전체 슬롯 캐시 갱신
-        for (const s of slots) {
-          await prisma.daySlotCache.upsert({
-            where: {
-              restaurantId_date: { restaurantId: r.id, date: s.date },
-            },
-            update: {
-              availableStatus: s.availableStatus,
-              availablePersons: JSON.stringify(s.availablePersonCounts),
-              benefit: s.benefit ? JSON.stringify(s.benefit) : null,
-              fetchedAt: new Date(),
-            },
-            create: {
-              restaurantId: r.id,
-              date: s.date,
-              availableStatus: s.availableStatus,
-              availablePersons: JSON.stringify(s.availablePersonCounts),
-              benefit: s.benefit ? JSON.stringify(s.benefit) : null,
-              fetchedAt: new Date(),
-            },
-          });
-        }
+      if (cached.benefit) {
+        try {
+          const benefitData = JSON.parse(cached.benefit);
+          if (benefitData.timeSlots && Array.isArray(benefitData.timeSlots)) {
+            timeSlots = benefitData.timeSlots.map((s: any) => ({
+              time: s.time,
+              available: s.available,
+            }));
 
-        if (slot && slot.availableStatus === "AVAILABLE") {
-          const personCounts = slot.availablePersonCounts;
-          if (persons && !personCounts.includes(persons)) {
-            results.push({ restaurantId: r.id, available: false, personCounts, benefit: null });
-          } else {
-            results.push({ restaurantId: r.id, available: true, personCounts, benefit: null });
+            let filtered = timeSlots!.filter((s) => s.available);
+
+            if (meal === "lunch") {
+              filtered = filtered.filter((s) => {
+                const hour = parseInt(s.time.split(":")[0]);
+                return hour < 15;
+              });
+            } else if (meal === "dinner") {
+              filtered = filtered.filter((s) => {
+                const hour = parseInt(s.time.split(":")[0]);
+                return hour >= 17;
+              });
+            }
+
+            availableTimes = filtered.map((s) => s.time);
           }
-        } else {
-          results.push({ restaurantId: r.id, available: false, personCounts: [], benefit: null });
-        }
-      } catch {
-        results.push({ restaurantId: r.id, available: false, personCounts: [], benefit: null });
+        } catch {}
       }
-    }
-  }
 
-  return NextResponse.json({ date, persons, results });
+      if (persons && personCounts.length > 0 && !personCounts.includes(persons)) {
+        results.push({
+          restaurantId: cached.restaurantId,
+          available: false,
+          personCounts,
+          timeSlots,
+          availableTimes: [],
+        });
+        continue;
+      }
+
+      const finalAvailable = meal ? availableTimes.length > 0 : isAvailable;
+
+      results.push({
+        restaurantId: cached.restaurantId,
+        available: finalAvailable,
+        personCounts,
+        timeSlots,
+        availableTimes,
+      });
+    }
+
+    return NextResponse.json({ date, persons, meal, results });
+  } catch (e) {
+    console.error("Availability API error:", e);
+    return NextResponse.json({ date, persons, meal, results: [] });
+  }
 }

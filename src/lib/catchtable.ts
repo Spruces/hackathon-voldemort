@@ -104,3 +104,59 @@ export function isAvailableOnDate(
 
   return { available: true, personCounts: slot.availablePersonCounts };
 }
+
+export interface TimeSlot {
+  time: string; // "18:00"
+  available: boolean;
+  tableType?: string;
+}
+
+export function getTimeSlots(
+  shopRef: string,
+  date: string,
+  persons: number
+): TimeSlot[] | null {
+  const sessionCookie = process.env.CT_SESSION_COOKIE;
+  if (!sessionCookie) return null;
+
+  try {
+    const dateCompact = date.replace(/-/g, "");
+    const script = `
+import asyncio, json, sys
+from catchtable_cli.client import CatchTableClient
+from catchtable_cli.config import CatchTableConfig
+
+async def main():
+    config = CatchTableConfig(session_cookie="${sessionCookie}")
+    client = CatchTableClient(config)
+    try:
+        result = await client.check_availability("${shopRef}", "${dateCompact}", ${persons})
+        print(json.dumps(result))
+    except Exception as e:
+        print(json.dumps({"error": str(e)}))
+    finally:
+        await client.close()
+
+asyncio.run(main())
+`;
+    const result = execSync(
+      `${CT_BIN.replace("/ct", "/python3")} -c '${script.replace(/'/g, "'\\''")}'`,
+      { encoding: "utf-8", timeout: 15000 }
+    );
+
+    const data = JSON.parse(result);
+    if (data.error) return null;
+
+    // time-slots 응답 파싱
+    const slots = data.data || data.timeSlots || [];
+    return slots.map((s: any) => ({
+      time: s.visitHhmi
+        ? `${s.visitHhmi.slice(0, 2)}:${s.visitHhmi.slice(2)}`
+        : s.time || "?",
+      available: s.isAvailable ?? s.available ?? true,
+      tableType: s.tableTypeName || s.tableType || undefined,
+    }));
+  } catch {
+    return null;
+  }
+}

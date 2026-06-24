@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { AppShell } from "@/components/app-shell";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -30,9 +31,11 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-dvh bg-background">
-        <main className="mx-auto max-w-lg min-h-dvh">
-          {children}
-        </main>
+        <AppShell>
+          <main className="mx-auto max-w-lg min-h-dvh">
+            {children}
+          </main>
+        </AppShell>
       </body>
     </html>
   );

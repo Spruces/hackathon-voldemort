@@ -9,7 +9,10 @@
     "lint": "eslint",
     "db:migrate": "prisma migrate dev",
     "db:seed": "tsx prisma/seed.ts",
-    "db:reset": "prisma migrate reset --force"
+    "db:reset": "prisma migrate reset --force",
+    "ct:auth": "python3 scripts/catchtable-auth.py",
+    "ct:fetch": "tsx scripts/fetch-catchtable-details.ts",
+    "ct:timeslots": "python3 scripts/catchtable-timeslots-worker.py"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",

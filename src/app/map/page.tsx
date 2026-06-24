@@ -1,12 +1,18 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Users,
   Search,
   ChevronUp,
+  ChevronDown,
   Zap,
+  X,
+  CalendarDays,
+  Phone,
+  Sun,
+  Moon,
 } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { CATEGORIES, getCategoryEmoji } from "@/lib/constants";
@@ -36,24 +42,23 @@ interface AvailabilityResult {
   restaurantId: number;
   available: boolean;
   personCounts: number[];
+  timeSlots: Array<{ time: string; available: boolean }> | null;
+  availableTimes: string[];
 }
 
-type DateOption = "today" | "tomorrow" | "dayafter" | string;
-type TimeSlot = "lunch" | "dinner" | "late" | null;
-
-function getDateString(option: DateOption): string {
-  const d = new Date();
-  if (option === "tomorrow") d.setDate(d.getDate() + 1);
-  else if (option === "dayafter") d.setDate(d.getDate() + 2);
-  else if (option !== "today") return option;
-  return d.toISOString().split("T")[0];
+function getDateString(date: string | null): string {
+  if (!date) return new Date().toISOString().split("T")[0];
+  return date;
 }
 
-function getDateLabel(option: DateOption): string {
-  if (option === "today") return "오늘";
-  if (option === "tomorrow") return "내일";
-  if (option === "dayafter") return "모레";
-  return option;
+function formatDateLabel(dateStr: string): string {
+  const today = new Date();
+  const target = new Date(dateStr + "T00:00:00");
+  const diff = Math.round((target.getTime() - today.setHours(0, 0, 0, 0)) / 86400000);
+  if (diff === 0) return "오늘";
+  if (diff === 1) return "내일";
+  if (diff === 2) return "모레";
+  return `${target.getMonth() + 1}/${target.getDate()}`;
 }
 
 export default function MapPage() {
@@ -69,12 +74,14 @@ export default function MapPage() {
   const [locationError, setLocationError] = useState(false);
 
   // 필터 상태
-  const [selectedDate, setSelectedDate] = useState<DateOption>("today");
-  const [selectedTime, setSelectedTime] = useState<TimeSlot>(null);
+  const [selectedDate, setSelectedDate] = useState<string | null>(null); // YYYY-MM-DD or null (지금 바로)
+  const [selectedMeal, setSelectedMeal] = useState<"lunch" | "dinner" | null>(null);
   const [selectedPersons, setSelectedPersons] = useState(2);
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedLocation, setSelectedLocation] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
-  const [isNowMode, setIsNowMode] = useState(false);
+  const [isNowMode, setIsNowMode] = useState(true);
+  const [showFilters, setShowFilters] = useState(true);
 
   // 결과 상태
   const [etaMap, setEtaMap] = useState<Map<number, ETAResult>>(new Map());
@@ -205,6 +212,8 @@ export default function MapPage() {
     const date = getDateString(selectedDate);
     const params = new URLSearchParams({ date });
     if (selectedPersons) params.set("persons", String(selectedPersons));
+    if (selectedMeal) params.set("meal", selectedMeal);
+
 
     try {
       const res = await fetch(`/api/availability?${params}`);
@@ -255,16 +264,34 @@ export default function MapPage() {
     }
   }, [userLocation, restaurants]);
 
-  // 7. 날짜/인원 변경 시 예약 조회
+  // 7. 날짜/인원/시간대 변경 시 예약 조회
   useEffect(() => {
     if (restaurants.length > 0) {
       fetchAvailability();
     }
-  }, [selectedDate, selectedPersons, restaurants.length]);
+  }, [selectedDate, selectedPersons, selectedMeal, restaurants.length]);
+
+
+  // 지역 목록 (건수 내림차순)
+  const locations = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const r of restaurants) {
+      counts[r.locationNorm] = (counts[r.locationNorm] || 0) + 1;
+    }
+    return Object.entries(counts)
+      .sort((a, b) => b[1] - a[1])
+      .map(([name, count]) => ({ name, count }));
+  }, [restaurants]);
+
+  const activeFilterCount =
+    (selectedCategory !== "all" ? 1 : 0) +
+    (selectedLocation !== "all" ? 1 : 0);
 
   // 8. 필터링된 리스트
   const filteredRestaurants = restaurants.filter((r) => {
     if (selectedCategory !== "all" && r.categoryNorm !== selectedCategory)
+      return false;
+    if (selectedLocation !== "all" && r.locationNorm !== selectedLocation)
       return false;
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
@@ -279,22 +306,31 @@ export default function MapPage() {
     return true;
   });
 
-  // 정렬: 도달시간 있으면 시간순, 없으면 예약 가능 여부 우선
-  const sortedRestaurants = [...filteredRestaurants].sort((a, b) => {
-    const etaA = etaMap.get(a.id)?.durationMin ?? 9999;
-    const etaB = etaMap.get(b.id)?.durationMin ?? 9999;
-    if (etaA !== etaB) return etaA - etaB;
-
-    const availA = availMap.get(a.id)?.available ? 0 : 1;
-    const availB = availMap.get(b.id)?.available ? 0 : 1;
-    return availA - availB;
+  // 예약 가능 필터: 마감된 식당 제외, 미매칭(전화예약)은 유지
+  const availableRestaurants = filteredRestaurants.filter((r) => {
+    if (!r.catchtableMatched) return true; // 전화예약만 가능 → 유지
+    const avail = availMap.get(r.id);
+    if (!avail) return true; // 아직 조회 안 됨 → 유지
+    return avail.available; // 예약 가능한 것만
   });
 
-  // "지금 바로" 모드
+  // 정렬: 예약가능 > 전화예약 > 도달시간순
+  const sortedRestaurants = [...availableRestaurants].sort((a, b) => {
+    // 예약가능 우선, 전화예약은 뒤로
+    const aAvail = a.catchtableMatched && availMap.get(a.id)?.available ? 0 : 1;
+    const bAvail = b.catchtableMatched && availMap.get(b.id)?.available ? 0 : 1;
+    if (aAvail !== bAvail) return aAvail - bAvail;
+
+    const etaA = etaMap.get(a.id)?.durationMin ?? 9999;
+    const etaB = etaMap.get(b.id)?.durationMin ?? 9999;
+    return etaA - etaB;
+  });
+
+  // "지금 바로 출발" 모드
   const handleNowMode = useCallback(() => {
     setIsNowMode(true);
-    setSelectedDate("today");
-    setSelectedTime(null);
+    setSelectedDate(null);
+    setSelectedMeal(null);
     fetchETA();
     fetchAvailability();
   }, [fetchETA, fetchAvailability]);
@@ -312,9 +348,8 @@ export default function MapPage() {
       {/* 지도 */}
       <div ref={mapRef} className="absolute inset-0 z-0" />
 
-      {/* 상단 컨트롤 오버레이 */}
+      {/* 상단: 모드 배지만 */}
       <div className="absolute top-0 left-0 right-0 z-10 pt-safe">
-        {/* 모드 배지 */}
         <div className="flex items-center justify-between px-4 pt-3 pb-2">
           <div className="flex items-center gap-2">
             <span className="text-xs px-2 py-1 rounded-full bg-surface/80 backdrop-blur border border-glass-border text-text-secondary">
@@ -327,10 +362,32 @@ export default function MapPage() {
             </span>
           )}
         </div>
+      </div>
 
-        {/* 날짜/시간 선택 바 */}
+      {/* 바텀시트 */}
+      <motion.div
+        className={cn(
+          "absolute bottom-[56px] left-0 right-0 z-20",
+          "bg-background/95 backdrop-blur-xl",
+          "border-t border-glass-border",
+          "rounded-t-3xl shadow-2xl"
+        )}
+        animate={{
+          height: sheetExpanded ? "75vh" : "45vh",
+        }}
+        transition={{ type: "spring", damping: 25, stiffness: 300 }}
+      >
+        {/* 핸들 */}
+        <div
+          className="flex justify-center pt-3 pb-2 cursor-pointer"
+          onClick={() => setSheetExpanded(!sheetExpanded)}
+        >
+          <div className="w-10 h-1 rounded-full bg-border" />
+        </div>
+
+        {/* 필터 컨트롤 */}
         <div className="px-4 pb-2 flex flex-col gap-2">
-          {/* "지금 바로" + 날짜 칩 */}
+          {/* "지금 바로 출발" + 예약일정 선택 + 시간대 + 인원 */}
           <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide">
             <button
               onClick={handleNowMode}
@@ -343,30 +400,62 @@ export default function MapPage() {
               )}
             >
               <Zap className="w-4 h-4" />
-              지금 바로
+              지금 바로 출발
             </button>
 
-            {(["today", "tomorrow", "dayafter"] as DateOption[]).map((opt) => (
-              <button
-                key={opt}
-                onClick={() => {
-                  setIsNowMode(false);
-                  setSelectedDate(opt);
+            {/* 날짜 선택 — native date input */}
+            <label
+              className={cn(
+                "relative flex items-center gap-1.5 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all cursor-pointer",
+                !isNowMode && selectedDate
+                  ? "bg-gold/20 border border-gold text-gold"
+                  : "bg-surface/80 backdrop-blur border border-glass-border text-text-secondary"
+              )}
+            >
+              <CalendarDays className="w-4 h-4" />
+              {!isNowMode && selectedDate
+                ? formatDateLabel(selectedDate)
+                : "날짜 선택"}
+              <input
+                type="date"
+                value={selectedDate || ""}
+                min={new Date().toISOString().split("T")[0]}
+                onChange={(e) => {
+                  if (e.target.value) {
+                    setIsNowMode(false);
+                    setSelectedDate(e.target.value);
+                  }
                 }}
-                className={cn(
-                  "px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all",
-                  selectedDate === opt && !isNowMode
-                    ? "bg-gold/20 border border-gold text-gold"
-                    : "bg-surface/80 backdrop-blur border border-glass-border text-text-secondary"
-                )}
-              >
-                {getDateLabel(opt)}
-              </button>
-            ))}
-          </div>
+                className="absolute inset-0 opacity-0 cursor-pointer"
+              />
+            </label>
 
-          {/* 인원 + 시간대 */}
-          <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide">
+            {/* 점심/저녁 */}
+            <button
+              onClick={() => setSelectedMeal(selectedMeal === "lunch" ? null : "lunch")}
+              className={cn(
+                "flex items-center gap-1 px-3 py-2 rounded-full text-sm whitespace-nowrap transition-all",
+                selectedMeal === "lunch"
+                  ? "bg-gold/20 border border-gold text-gold"
+                  : "bg-surface/80 backdrop-blur border border-glass-border text-text-secondary"
+              )}
+            >
+              <Sun className="w-3.5 h-3.5" />
+              점심
+            </button>
+            <button
+              onClick={() => setSelectedMeal(selectedMeal === "dinner" ? null : "dinner")}
+              className={cn(
+                "flex items-center gap-1 px-3 py-2 rounded-full text-sm whitespace-nowrap transition-all",
+                selectedMeal === "dinner"
+                  ? "bg-gold/20 border border-gold text-gold"
+                  : "bg-surface/80 backdrop-blur border border-glass-border text-text-secondary"
+              )}
+            >
+              <Moon className="w-3.5 h-3.5" />
+              저녁
+            </button>
+
             <div className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-surface/80 backdrop-blur border border-glass-border">
               <Users className="w-3.5 h-3.5 text-text-muted" />
               <select
@@ -381,32 +470,11 @@ export default function MapPage() {
                 ))}
               </select>
             </div>
+          </div>
 
-            {(
-              [
-                { key: "lunch", label: "점심" },
-                { key: "dinner", label: "저녁" },
-                { key: "late", label: "야식" },
-              ] as const
-            ).map(({ key, label }) => (
-              <button
-                key={key}
-                onClick={() =>
-                  setSelectedTime(selectedTime === key ? null : key)
-                }
-                className={cn(
-                  "px-3 py-1.5 rounded-full text-sm whitespace-nowrap transition-all",
-                  selectedTime === key
-                    ? "bg-gold/20 border border-gold text-gold"
-                    : "bg-surface/80 backdrop-blur border border-glass-border text-text-secondary"
-                )}
-              >
-                {label}
-              </button>
-            ))}
-
-            {/* 검색 */}
-            <div className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-surface/80 backdrop-blur border border-glass-border flex-1 min-w-[120px]">
+          {/* 검색 + 필터 토글 */}
+          <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide">
+            <div className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-surface/80 backdrop-blur border border-glass-border flex-1 min-w-[100px]">
               <Search className="w-3.5 h-3.5 text-text-muted flex-shrink-0" />
               <input
                 type="text"
@@ -415,26 +483,125 @@ export default function MapPage() {
                 placeholder="검색"
                 className="bg-transparent text-sm text-text-primary outline-none w-full"
               />
+              {searchQuery && (
+                <button onClick={() => setSearchQuery("")}>
+                  <X className="w-3.5 h-3.5 text-text-muted" />
+                </button>
+              )}
             </div>
+
+            <button
+              onClick={() => setShowFilters(!showFilters)}
+              className={cn(
+                "flex items-center gap-1 px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-all",
+                showFilters || activeFilterCount > 0
+                  ? "bg-gold/20 border border-gold text-gold"
+                  : "bg-surface/80 backdrop-blur border border-glass-border text-text-secondary"
+              )}
+            >
+              필터
+              {activeFilterCount > 0 && (
+                <span className="w-4 h-4 rounded-full bg-gold text-background text-[10px] flex items-center justify-center font-bold">
+                  {activeFilterCount}
+                </span>
+              )}
+              <ChevronDown
+                className={cn(
+                  "w-3 h-3 transition-transform",
+                  showFilters && "rotate-180"
+                )}
+              />
+            </button>
           </div>
 
-          {/* 업종 칩 */}
-          <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-hide pb-1">
-            {CATEGORIES.map((cat) => (
+          {/* 선택된 필터 태그 (접혀있을 때) */}
+          {!showFilters && activeFilterCount > 0 && (
+            <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-hide">
+              {selectedCategory !== "all" && (
+                <span className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-gold/10 border border-gold/20 text-xs text-gold">
+                  {getCategoryEmoji(selectedCategory)} {selectedCategory}
+                  <button onClick={() => setSelectedCategory("all")} className="ml-0.5">
+                    <X className="w-3 h-3" />
+                  </button>
+                </span>
+              )}
+              {selectedLocation !== "all" && (
+                <span className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-gold/10 border border-gold/20 text-xs text-gold">
+                  {selectedLocation}
+                  <button onClick={() => setSelectedLocation("all")} className="ml-0.5">
+                    <X className="w-3 h-3" />
+                  </button>
+                </span>
+              )}
               <button
-                key={cat.key}
-                onClick={() => setSelectedCategory(cat.key)}
-                className={cn(
-                  "px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-all",
-                  selectedCategory === cat.key
-                    ? "bg-gold/20 border border-gold text-gold"
-                    : "bg-surface/80 backdrop-blur border border-glass-border text-text-secondary"
-                )}
+                onClick={() => { setSelectedCategory("all"); setSelectedLocation("all"); }}
+                className="px-2.5 py-1 rounded-full text-xs text-text-muted border border-border"
               >
-                {cat.emoji} {cat.label}
+                초기화
               </button>
-            ))}
-          </div>
+            </div>
+          )}
+
+          {/* 업종 + 지역 (펼침) */}
+          <AnimatePresence>
+            {showFilters && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="overflow-hidden flex flex-col gap-2"
+              >
+                {/* 업종 */}
+                <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-hide">
+                  {CATEGORIES.map((cat) => (
+                    <button
+                      key={cat.key}
+                      onClick={() => setSelectedCategory(cat.key)}
+                      className={cn(
+                        "px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-all",
+                        selectedCategory === cat.key
+                          ? "bg-gold/20 border border-gold text-gold"
+                          : "bg-surface/80 backdrop-blur border border-glass-border text-text-secondary"
+                      )}
+                    >
+                      {cat.emoji} {cat.label}
+                    </button>
+                  ))}
+                </div>
+
+                {/* 지역 */}
+                <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-hide pb-1">
+                  <button
+                    onClick={() => setSelectedLocation("all")}
+                    className={cn(
+                      "px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-all",
+                      selectedLocation === "all"
+                        ? "bg-gold/20 border border-gold text-gold"
+                        : "bg-surface/80 backdrop-blur border border-glass-border text-text-secondary"
+                    )}
+                  >
+                    전체 지역
+                  </button>
+                  {locations.map((loc) => (
+                    <button
+                      key={loc.name}
+                      onClick={() => setSelectedLocation(loc.name)}
+                      className={cn(
+                        "px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-all",
+                        selectedLocation === loc.name
+                          ? "bg-gold/20 border border-gold text-gold"
+                          : "bg-surface/80 backdrop-blur border border-glass-border text-text-secondary"
+                      )}
+                    >
+                      {loc.name}
+                      <span className="ml-1 opacity-50">{loc.count}</span>
+                    </button>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* 로딩 인디케이터 */}
@@ -450,34 +617,12 @@ export default function MapPage() {
             </div>
           </div>
         )}
-      </div>
-
-      {/* 바텀시트 */}
-      <motion.div
-        className={cn(
-          "absolute bottom-0 left-0 right-0 z-20",
-          "bg-background/95 backdrop-blur-xl",
-          "border-t border-glass-border",
-          "rounded-t-3xl shadow-2xl"
-        )}
-        animate={{
-          height: sheetExpanded ? "70vh" : "35vh",
-        }}
-        transition={{ type: "spring", damping: 25, stiffness: 300 }}
-      >
-        {/* 핸들 */}
-        <div
-          className="flex justify-center pt-3 pb-2 cursor-pointer"
-          onClick={() => setSheetExpanded(!sheetExpanded)}
-        >
-          <div className="w-10 h-1 rounded-full bg-border" />
-        </div>
 
         {/* 헤더 */}
         <div className="px-4 pb-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <h2 className="text-lg font-bold text-text-primary">
-              {isNowMode ? "지금 갈 수 있는 곳" : "추천 식당"}
+              {isNowMode ? "지금 바로 갈 수 있는 곳" : "예약 가능한 식당"}
             </h2>
             <span className="text-xs text-text-muted">
               {sortedRestaurants.length}곳
@@ -497,7 +642,7 @@ export default function MapPage() {
         </div>
 
         {/* 리스트 */}
-        <div className="overflow-y-auto px-4 pb-safe" style={{ height: "calc(100% - 80px)" }}>
+        <div className="overflow-y-auto px-4 pb-safe" style={{ height: "calc(100% - 240px)" }}>
           <div className="flex flex-col gap-3">
             {sortedRestaurants.map((r) => {
               const eta = etaMap.get(r.id);
@@ -589,28 +734,28 @@ function RestaurantCard({
 
       {/* 예약 상태 */}
       <div className="flex flex-col items-end gap-1">
-        {availability ? (
+        {restaurant.catchtableMatched ? (
           isAvailable ? (
-            <span className="text-xs px-2 py-1 rounded-full bg-gold/10 text-gold border border-gold/20">
-              예약가능
-            </span>
+            <div className="flex flex-col items-end gap-0.5">
+              <span className="text-xs px-2 py-1 rounded-full bg-gold/10 text-gold border border-gold/20">
+                예약 가능
+              </span>
+              {availability?.availableTimes && availability.availableTimes.length > 0 && (
+                <span className="text-[10px] text-gold/70">
+                  {availability.availableTimes.slice(0, 3).join(" · ")}
+                  {availability.availableTimes.length > 3 && ` +${availability.availableTimes.length - 3}`}
+                </span>
+              )}
+            </div>
           ) : (
             <span className="text-xs px-2 py-1 rounded-full bg-surface-alt text-text-muted">
               마감
             </span>
           )
-        ) : restaurant.catchtableMatched ? (
-          <span className="text-xs px-2 py-1 rounded-full bg-surface-alt text-text-muted">
-            확인중
-          </span>
         ) : (
-          <span className="text-xs px-2 py-1 rounded-full bg-surface-alt text-text-muted">
-            전화문의
-          </span>
-        )}
-        {isAvailable && availability?.personCounts.length > 0 && (
-          <span className="text-[10px] text-text-muted">
-            {availability.personCounts.join(",")}명
+          <span className="flex items-center gap-1 text-xs px-2 py-1 rounded-full bg-surface-alt text-text-muted border border-border/50">
+            <Phone className="w-3 h-3" />
+            전화예약
           </span>
         )}
       </div>
