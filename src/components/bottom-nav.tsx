@@ -2,12 +2,13 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Map, List } from "lucide-react";
+import { Map, List, Settings } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 const TABS = [
-  { href: "/map", label: "지도", icon: Map },
   { href: "/list", label: "리스트", icon: List },
+  { href: "/map", label: "지도", icon: Map },
+  { href: "/settings", label: "설정", icon: Settings },
 ] as const;
 
 export function BottomNav() {

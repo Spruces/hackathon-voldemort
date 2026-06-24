@@ -85,13 +85,18 @@ export default function ListPage() {
     <div className="min-h-dvh bg-background pb-16">
       {/* 상단 헤더 */}
       <div className="sticky top-0 z-10 pt-safe bg-background/95 backdrop-blur-xl border-b border-glass-border">
-        <div className="flex items-center justify-between px-4 pt-3 pb-2">
+        <div className="flex items-center justify-between px-4 pt-3 pb-1">
           <span className="text-xs px-2 py-1 rounded-full bg-surface/80 backdrop-blur border border-glass-border text-text-secondary">
             {role === "owner" ? "🛠 관리자" : "👤 임원"}
           </span>
           <span className="text-xs text-text-muted">
             {filtered.length}곳
           </span>
+        </div>
+
+        {/* 브랜드 타이틀 */}
+        <div className="px-4 pb-2 text-center">
+          <h1 className="text-xl font-bold text-gold tracking-[0.2em]">THE GUIDE</h1>
         </div>
 
         {/* 검색 + 필터 토글 */}
@@ -274,7 +279,7 @@ function RestaurantCard({ restaurant }: { restaurant: Restaurant }) {
 
       {/* 정보 */}
       <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-2">
+        <div className="flex items-baseline gap-2">
           <span className="font-semibold text-text-primary truncate">
             {restaurant.nameKor}
           </span>
@@ -295,16 +300,12 @@ function RestaurantCard({ restaurant }: { restaurant: Restaurant }) {
         </div>
       </div>
 
-      {/* 우측 */}
+      {/* 우측: 전화번호 (없으면 공란) */}
       <div className="flex items-center gap-2 flex-shrink-0">
-        {restaurant.catchtableMatched ? (
-          <span className="text-xs px-2 py-1 rounded-full bg-gold/10 text-gold border border-gold/20">
-            웹예약
-          </span>
-        ) : (
-          <span className="flex items-center gap-1 text-xs px-2 py-1 rounded-full bg-surface-alt text-text-muted border border-border/50">
-            <Phone className="w-3 h-3" />
-            전화예약
+        {restaurant.tel && (
+          <span className="flex items-center gap-1 text-xs text-text-secondary whitespace-nowrap">
+            <Phone className="w-3 h-3 text-text-muted" />
+            {restaurant.tel}
           </span>
         )}
         <ChevronRight className="w-4 h-4 text-text-muted/40" />

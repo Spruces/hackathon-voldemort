@@ -1,19 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #0A0A0F;
-  --color-surface: #1A1A2E;
-  --color-surface-alt: #16213E;
-  --color-gold: #D4AF37;
-  --color-gold-light: #F5E6A3;
-  --color-gold-dim: #8B7355;
-  --color-text-primary: #FAFAFA;
-  --color-text-secondary: #A0A0B0;
-  --color-text-muted: #6B6B7B;
-  --color-danger: #E74C3C;
-  --color-border: #2A2A3E;
-  --color-glass: rgba(26, 26, 46, 0.6);
-  --color-glass-border: rgba(212, 175, 55, 0.15);
+  /* 목업 기반 블랙 & 차분한 샴페인골드 (고급스러운 톤) */
+  --color-background: #0d0d0f;
+  --color-surface: #15151a;
+  --color-surface-alt: #1c1c22;
+  --color-gold: #c9a96e;
+  --color-gold-light: #e3cd9a;
+  --color-gold-dim: #b89968;
+  --color-text-primary: #ececec;
+  --color-text-secondary: #a8a8b0;
+  --color-text-muted: #8a8a92;
+  --color-danger: #c8102e;
+  --color-border: #2a2a30;
+  --color-glass: rgba(21, 21, 26, 0.65);
+  --color-glass-border: rgba(201, 169, 110, 0.18);
 
   --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }

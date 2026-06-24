@@ -11,8 +11,6 @@ import {
   X,
   CalendarDays,
   Phone,
-  Sun,
-  Moon,
 } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { CATEGORIES, getCategoryEmoji } from "@/lib/constants";
@@ -75,7 +73,6 @@ export default function MapPage() {
 
   // 필터 상태
   const [selectedDate, setSelectedDate] = useState<string | null>(null); // YYYY-MM-DD or null (지금 바로)
-  const [selectedMeal, setSelectedMeal] = useState<"lunch" | "dinner" | null>(null);
   const [selectedPersons, setSelectedPersons] = useState(2);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedLocation, setSelectedLocation] = useState("all");
@@ -98,6 +95,7 @@ export default function MapPage() {
   const mapRef = useRef<HTMLDivElement>(null);
   const kakaoMapRef = useRef<any>(null);
   const markersRef = useRef<any[]>([]);
+  const dateInputRef = useRef<HTMLInputElement>(null);
 
   // 1. 데이터 로드
   useEffect(() => {
@@ -212,7 +210,6 @@ export default function MapPage() {
     const date = getDateString(selectedDate);
     const params = new URLSearchParams({ date });
     if (selectedPersons) params.set("persons", String(selectedPersons));
-    if (selectedMeal) params.set("meal", selectedMeal);
 
 
     try {
@@ -269,7 +266,7 @@ export default function MapPage() {
     if (restaurants.length > 0) {
       fetchAvailability();
     }
-  }, [selectedDate, selectedPersons, selectedMeal, restaurants.length]);
+  }, [selectedDate, selectedPersons, restaurants.length]);
 
 
   // 지역 목록 (건수 내림차순)
@@ -330,7 +327,6 @@ export default function MapPage() {
   const handleNowMode = useCallback(() => {
     setIsNowMode(true);
     setSelectedDate(null);
-    setSelectedMeal(null);
     fetchETA();
     fetchAvailability();
   }, [fetchETA, fetchAvailability]);
@@ -387,8 +383,66 @@ export default function MapPage() {
 
         {/* 필터 컨트롤 */}
         <div className="px-4 pb-2 flex flex-col gap-2">
-          {/* "지금 바로 출발" + 예약일정 선택 + 시간대 + 인원 */}
+          {/* 날짜 선택 → 인원수 → 지금 바로 출발 순서 */}
           <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide">
+            {/* 날짜 선택 — native date input (클릭 시 달력 활성화) */}
+            <button
+              type="button"
+              onClick={() => {
+                const el = dateInputRef.current;
+                if (!el) return;
+                // 네이티브 달력 열기 (지원 브라우저는 showPicker, 아니면 focus+click)
+                if (typeof el.showPicker === "function") {
+                  try { el.showPicker(); return; } catch {}
+                }
+                el.focus();
+                el.click();
+              }}
+              className={cn(
+                "relative flex items-center gap-1.5 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all cursor-pointer",
+                !isNowMode && selectedDate
+                  ? "bg-gold/20 border border-gold text-gold"
+                  : "bg-surface/80 backdrop-blur border border-glass-border text-text-secondary"
+              )}
+            >
+              <CalendarDays className="w-4 h-4" />
+              {!isNowMode && selectedDate
+                ? formatDateLabel(selectedDate)
+                : "날짜 선택"}
+              <input
+                ref={dateInputRef}
+                type="date"
+                value={selectedDate || ""}
+                min={new Date().toISOString().split("T")[0]}
+                onChange={(e) => {
+                  if (e.target.value) {
+                    setIsNowMode(false);
+                    setSelectedDate(e.target.value);
+                  }
+                }}
+                className="absolute bottom-0 left-1/2 w-px h-px opacity-0 pointer-events-none"
+                tabIndex={-1}
+                aria-hidden="true"
+              />
+            </button>
+
+            {/* 인원수 */}
+            <div className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-surface/80 backdrop-blur border border-glass-border">
+              <Users className="w-3.5 h-3.5 text-text-muted" />
+              <select
+                value={selectedPersons}
+                onChange={(e) => setSelectedPersons(Number(e.target.value))}
+                className="bg-transparent text-sm text-text-primary outline-none"
+              >
+                {[1, 2, 3, 4, 5, 6].map((n) => (
+                  <option key={n} value={n} className="bg-surface text-text-primary" style={{ backgroundColor: "#1a1a1f", color: "#ececec" }}>
+                    {n}명
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* 지금 바로 출발 */}
             <button
               onClick={handleNowMode}
               className={cn(
@@ -402,74 +456,6 @@ export default function MapPage() {
               <Zap className="w-4 h-4" />
               지금 바로 출발
             </button>
-
-            {/* 날짜 선택 — native date input */}
-            <label
-              className={cn(
-                "relative flex items-center gap-1.5 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all cursor-pointer",
-                !isNowMode && selectedDate
-                  ? "bg-gold/20 border border-gold text-gold"
-                  : "bg-surface/80 backdrop-blur border border-glass-border text-text-secondary"
-              )}
-            >
-              <CalendarDays className="w-4 h-4" />
-              {!isNowMode && selectedDate
-                ? formatDateLabel(selectedDate)
-                : "날짜 선택"}
-              <input
-                type="date"
-                value={selectedDate || ""}
-                min={new Date().toISOString().split("T")[0]}
-                onChange={(e) => {
-                  if (e.target.value) {
-                    setIsNowMode(false);
-                    setSelectedDate(e.target.value);
-                  }
-                }}
-                className="absolute inset-0 opacity-0 cursor-pointer"
-              />
-            </label>
-
-            {/* 점심/저녁 */}
-            <button
-              onClick={() => setSelectedMeal(selectedMeal === "lunch" ? null : "lunch")}
-              className={cn(
-                "flex items-center gap-1 px-3 py-2 rounded-full text-sm whitespace-nowrap transition-all",
-                selectedMeal === "lunch"
-                  ? "bg-gold/20 border border-gold text-gold"
-                  : "bg-surface/80 backdrop-blur border border-glass-border text-text-secondary"
-              )}
-            >
-              <Sun className="w-3.5 h-3.5" />
-              점심
-            </button>
-            <button
-              onClick={() => setSelectedMeal(selectedMeal === "dinner" ? null : "dinner")}
-              className={cn(
-                "flex items-center gap-1 px-3 py-2 rounded-full text-sm whitespace-nowrap transition-all",
-                selectedMeal === "dinner"
-                  ? "bg-gold/20 border border-gold text-gold"
-                  : "bg-surface/80 backdrop-blur border border-glass-border text-text-secondary"
-              )}
-            >
-              <Moon className="w-3.5 h-3.5" />
-              저녁
-            </button>
-
-            <div className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-surface/80 backdrop-blur border border-glass-border">
-              <Users className="w-3.5 h-3.5 text-text-muted" />
-              <select
-                value={selectedPersons}
-                onChange={(e) => setSelectedPersons(Number(e.target.value))}
-                className="bg-transparent text-sm text-text-primary outline-none"
-              >
-                {[1, 2, 3, 4, 5, 6].map((n) => (
-                  <option key={n} value={n}>
-                    {n}명
-                  </option>
-                ))}
-              </select>
-            </div>
           </div>
 
           {/* 검색 + 필터 토글 */}
