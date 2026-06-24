@@ -1,0 +1,39 @@
+# === OS 생성 파일 ===
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# === 엑셀/오피스 임시 파일 (열어두면 생기는 ~$ 파일) ===
+~$*.xlsx
+~$*.xls
+~$*.docx
+*.tmp
+
+# === 개발 환경 / 의존성 (개발자 작업 시 생성됨) ===
+node_modules/
+dist/
+build/
+.next/
+.cache/
+
+# === Python (데이터 분석 시 생성됨) ===
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# === 비밀 정보 (AWS 키, 비밀번호 등 — 절대 올리면 안 됨) ===
+.env
+.env.local
+*.pem
+*.key
+secrets.json
+
+# === 에디터/IDE ===
+.vscode/
+.idea/
+
+# === Claude Code 개인 설정 (PC별 로컬 설정, 공유 불필요) ===
+.claude/settings.local.json
