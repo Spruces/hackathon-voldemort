@@ -1,0 +1,35 @@
+/* Pretendard — 셀프 호스팅 (full 버전: 영문·숫자·한글 모두 포함)
+   소스: https://github.com/orioncactus/pretendard (v1.3.9, OFL-1.1)
+*/
+
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('./PretendardVariable.woff2') format('woff2-variations');
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 300;
+  font-display: swap;
+  src: url('./Pretendard-Light.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 400;
+  font-display: swap;
+  src: url('./Pretendard-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 500;
+  font-display: swap;
+  src: url('./Pretendard-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 600;
+  font-display: swap;
+  src: url('./Pretendard-SemiBold.woff2') format('woff2');
+}

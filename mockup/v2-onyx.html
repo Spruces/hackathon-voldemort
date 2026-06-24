@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VIP RESTAURANTS — B: 오닉스 클래식</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./fonts/pretendard.css" />
+<style>
+  :root {
+    --bg: #18120c;
+    --bg-card: #1f1812;
+    --bg-darker: #0e0a06;
+    --line: rgba(212, 175, 110, 0.18);
+    --line-strong: rgba(212, 175, 110, 0.5);
+    --gold: #d4af6e;
+    --gold-light: #e8c987;
+    --red: #b8323b;
+    --text: #ede5d3;
+    --muted: #8a7d6a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html, body { background: var(--bg); color: var(--text); font-family: 'Pretendard', -apple-system, sans-serif; font-weight: 400; }
+  body {
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding-bottom: 60px;
+    background:
+      radial-gradient(ellipse at top, rgba(212,175,110,0.04) 0%, transparent 50%),
+      var(--bg);
+  }
+
+  .header {
+    background: var(--bg-darker);
+    color: #fff;
+    padding: 16px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px double var(--gold);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .header .brand {
+    font-family: 'Cormorant Infant', 'Pretendard', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    color: var(--gold);
+    font-style: italic;
+  }
+  .header .badge {
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    color: var(--gold-light);
+    border: 1px solid var(--gold);
+    padding: 4px 11px;
+    font-family: 'Cormorant Infant', serif;
+  }
+
+  .hero-title {
+    padding: 56px 24px 36px;
+    text-align: center;
+    position: relative;
+  }
+  .hero-title::before, .hero-title::after {
+    content: "·";
+    color: var(--gold);
+    font-size: 18px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .hero-title::before { left: 50%; margin-left: -120px; }
+  .hero-title::after { left: 50%; margin-left: 110px; }
+  .hero-title h1 {
+    font-family: 'Cormorant Infant', serif;
+    font-size: 38px;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    font-style: italic;
+    line-height: 1;
+  }
+  .hero-title .sub {
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    margin-top: 18px;
+    font-family: 'Cormorant Infant', serif;
+    font-weight: 400;
+  }
+  .divider {
+    height: 1px;
+    margin: 0 auto 8px;
+    width: 80%;
+    background: linear-gradient(90deg, transparent, var(--gold) 50%, transparent);
+    opacity: 0.4;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    padding: 14px 18px 22px;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    flex-shrink: 0;
+    padding: 10px 18px;
+    font-size: 12px;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid var(--line);
+    cursor: pointer;
+    transition: all 0.25s;
+    white-space: nowrap;
+    letter-spacing: 0.16em;
+    font-family: 'Cormorant Infant', 'Pretendard', sans-serif;
+    font-weight: 500;
+    margin-right: 8px;
+  }
+  .tab:hover { border-color: var(--line-strong); }
+  .tab.active {
+    color: var(--bg-darker);
+    background: var(--gold);
+    border-color: var(--gold);
+    font-weight: 600;
+  }
+  .tab .count { opacity: 0.7; margin-left: 4px; }
+
+  .search-bar {
+    padding: 16px 22px 12px;
+  }
+  .search-bar input {
+    width: 100%;
+    background: var(--bg-card);
+    color: var(--text);
+    border: 1px solid var(--line);
+    padding: 14px 18px;
+    font-size: 13px;
+    font-family: inherit;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+  }
+  .search-bar input:focus { outline: none; border-color: var(--gold); }
+  .search-bar input::placeholder { color: var(--muted); font-style: italic; }
+
+  .list { padding: 14px 0; }
+  .card {
+    padding: 24px 26px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+  }
+  .card:hover {
+    background: linear-gradient(90deg, rgba(212,175,110,0.03) 0%, transparent 100%);
+  }
+  .card::after {
+    content: "›";
+    position: absolute;
+    right: 22px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold);
+    font-size: 22px;
+    opacity: 0.4;
+    font-family: serif;
+    transition: all 0.25s;
+  }
+  .card:hover::after { opacity: 1; right: 18px; }
+  .card .top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding-right: 18px;
+  }
+  .card .name {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: 0.005em;
+  }
+  .card .name-eng {
+    font-family: 'Cormorant Infant', serif;
+    font-size: 14px;
+    color: var(--gold);
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    opacity: 0.85;
+  }
+  .card .meta {
+    display: flex;
+    gap: 10px;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-family: 'Cormorant Infant', 'Pretendard', -apple-system, sans-serif;
+  }
+  .card .meta .cat { color: var(--gold-light); font-weight: 500; }
+  .card .meta .sep { color: var(--line-strong); }
+
+  .badge-michelin {
+    display: inline-block;
+    background: var(--red);
+    color: #f5e6c4;
+    font-size: 9px;
+    padding: 3px 8px;
+    letter-spacing: 0.28em;
+    font-weight: 500;
+    vertical-align: middle;
+    margin-left: 8px;
+    font-family: 'Cormorant Infant', serif;
+  }
+  .badge-vip {
+    display: inline-block;
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    font-size: 9px;
+    padding: 3px 9px;
+    letter-spacing: 0.32em;
+    font-weight: 500;
+    vertical-align: middle;
+    margin-left: 8px;
+    font-family: 'Cormorant Infant', serif;
+    font-style: italic;
+  }
+
+  .mode-switch {
+    position: fixed;
+    bottom: 22px;
+    right: calc(50vw - 240px + 22px);
+    background: var(--bg-darker);
+    border: 1px solid var(--gold);
+    padding: 11px 20px;
+    color: var(--gold);
+    font-size: 11px;
+    cursor: pointer;
+    z-index: 50;
+    letter-spacing: 0.22em;
+    backdrop-filter: blur(8px);
+    font-family: 'Cormorant Infant', serif;
+    font-weight: 500;
+    font-style: italic;
+  }
+  @media (max-width: 480px) {
+    .mode-switch { right: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="brand">VIP RESTAURANTS</div>
+  <div class="badge">Curated · MMXXVI</div>
+</div>
+
+<div class="hero-title">
+  <h1>Recommended</h1>
+  <div class="sub">SEOUL · 228 PLACES</div>
+</div>
+<div class="divider"></div>
+
+<div class="tabs">
+  <div class="tab active">전체<span class="count">228</span></div>
+  <div class="tab">한식<span class="count">68</span></div>
+  <div class="tab">일식<span class="count">43</span></div>
+  <div class="tab">이탈리안<span class="count">33</span></div>
+  <div class="tab">중식<span class="count">30</span></div>
+  <div class="tab">프렌치<span class="count">29</span></div>
+  <div class="tab">아메리칸<span class="count">20</span></div>
+</div>
+
+<div class="search-bar">
+  <input type="text" placeholder="Search by name, area, or cuisine" />
+</div>
+
+<div class="list">
+  <div class="card">
+    <div class="top">
+      <div class="name">라연<span class="badge-michelin">MICHELIN</span></div>
+      <div class="name-eng">Layeon</div>
+    </div>
+    <div class="meta">
+      <span class="cat">한식</span><span class="sep">·</span>
+      <span>장충동</span><span class="sep">·</span>
+      <span>신라호텔</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="top">
+      <div class="name">몽고네<span class="badge-vip">VIP</span></div>
+      <div class="name-eng">Mongone</div>
+    </div>
+    <div class="meta">
+      <span class="cat">이탈리안</span><span class="sep">·</span>
+      <span>신사동</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="top">
+      <div class="name">더 라운드</div>
+      <div class="name-eng">The Round</div>
+    </div>
+    <div class="meta">
+      <span class="cat">중식</span><span class="sep">·</span>
+      <span>청담동</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="top">
+      <div class="name">RELA</div>
+      <div class="name-eng">Rela</div>
+    </div>
+    <div class="meta">
+      <span class="cat">프렌치</span><span class="sep">·</span>
+      <span>상일동</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="top">
+      <div class="name">푸에고</div>
+      <div class="name-eng">Fuego</div>
+    </div>
+    <div class="meta">
+      <span class="cat">아메리칸</span><span class="sep">·</span>
+      <span>한남동</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="top">
+      <div class="name">휴135</div>
+      <div class="name-eng">Hue135</div>
+    </div>
+    <div class="meta">
+      <span class="cat">한식</span><span class="sep">·</span>
+      <span>한남동</span>
+    </div>
+  </div>
+</div>
+
+<button class="mode-switch">Viewer Mode</button>
+
+</body>
+</html>

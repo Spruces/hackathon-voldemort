@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Circle — Private Curator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./fonts/pretendard.css" />
+<style>
+  :root {
+    --bg: #07060a;
+    --bg-card: #0d0b10;
+    --bg-deep: #04030600;
+    --line: rgba(196, 167, 113, 0.10);
+    --line-soft: rgba(196, 167, 113, 0.22);
+    --line-strong: rgba(196, 167, 113, 0.5);
+    --gold: #b89968;
+    --gold-bright: #d4b482;
+    --gold-deep: #8a6d40;
+    --red: #6b1a25;
+    --text: #e4dcc7;
+    --text-soft: #948a76;
+    --muted: #4a4438;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    font-weight: 300;
+  }
+  body {
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding-bottom: 80px;
+    background-image:
+      radial-gradient(ellipse 600px 400px at top, rgba(184,153,104,0.06) 0%, transparent 60%),
+      linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.4) 100%);
+    background-attachment: fixed;
+  }
+
+  /* ── 비밀 봉투 헤더 ── */
+  .header {
+    background: linear-gradient(180deg, #050308 0%, #08070b 100%);
+    padding: 20px 24px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky; top: 0; z-index: 10;
+    border-bottom: 1px solid var(--gold);
+    box-shadow:
+      0 1px 0 rgba(184,153,104,0.15),
+      0 8px 24px rgba(0,0,0,0.5);
+  }
+  .header .crest {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .header .seal {
+    width: 26px; height: 26px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-family: 'Italiana', serif;
+    font-size: 12px;
+    letter-spacing: 0;
+  }
+  .header .brand {
+    font-family: 'Italiana', serif;
+    font-size: 16px;
+    letter-spacing: 0.42em;
+    color: var(--gold);
+    font-weight: 400;
+  }
+  .header .invite-tag {
+    font-family: 'Italiana', serif;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    color: var(--text-soft);
+    border: 1px solid var(--line-strong);
+    padding: 4px 10px 4px 11px;
+  }
+
+  /* ── 프라이빗 인사 영역 ── */
+  .greeting {
+    padding: 56px 26px 12px;
+    text-align: center;
+    position: relative;
+  }
+  .greeting .salute {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    margin-bottom: 14px;
+  }
+  .greeting h1 {
+    font-family: 'Italiana', serif;
+    font-size: 40px;
+    font-weight: 400;
+    color: var(--text);
+    letter-spacing: 0.06em;
+    line-height: 1.1;
+  }
+  .greeting h1 em {
+    color: var(--gold);
+    font-style: normal;
+  }
+  .greeting .by {
+    margin-top: 24px;
+    font-size: 9.5px;
+    letter-spacing: 0.6em;
+    color: var(--text-soft);
+    font-family: 'Italiana', serif;
+  }
+  .ornament {
+    color: var(--gold);
+    margin: 18px 0;
+    letter-spacing: 0.6em;
+    font-size: 11px;
+    opacity: 0.55;
+    text-align: center;
+  }
+
+  /* ── 큐레이터 노트 (회원 안내) ── */
+  .curator-note {
+    margin: 28px 26px 8px;
+    padding: 18px 22px;
+    border: 1px solid var(--line-soft);
+    background: rgba(184,153,104,0.025);
+    text-align: center;
+  }
+  .curator-note .label {
+    font-family: 'Italiana', serif;
+    font-size: 9.5px;
+    letter-spacing: 0.45em;
+    color: var(--gold-deep);
+    margin-bottom: 8px;
+  }
+  .curator-note .body {
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--text-soft);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+  .curator-note .body em {
+    color: var(--gold);
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  /* ── 카테고리 (비밀스러운 챕터 라벨) ── */
+  .tabs {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    padding: 28px 24px 12px;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    flex-shrink: 0;
+    padding: 8px 14px 10px;
+    font-size: 10.5px;
+    color: var(--text-soft);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+    letter-spacing: 0.32em;
+    font-weight: 400;
+    font-family: 'Pretendard', sans-serif;
+  }
+  .tab:hover { color: var(--gold); }
+  .tab.active {
+    color: var(--gold);
+    position: relative;
+  }
+  .tab.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px; height: 3px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+  .tab .count {
+    margin-left: 4px;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── 검색 (작고 절제) ── */
+  .search-bar {
+    padding: 6px 26px 8px;
+    position: relative;
+  }
+  .search-bar::before {
+    content: "—";
+    position: absolute;
+    left: 26px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold);
+    font-size: 14px;
+    letter-spacing: 0;
+  }
+  .search-bar input {
+    width: 100%;
+    background: transparent;
+    color: var(--text);
+    border: none;
+    border-bottom: 1px solid var(--line);
+    padding: 12px 0 12px 24px;
+    font-size: 12px;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+  .search-bar input:focus {
+    outline: none;
+    border-bottom-color: var(--gold);
+  }
+  .search-bar input::placeholder {
+    color: var(--muted);
+    font-style: normal;
+  }
+
+  /* ── 셀렉션 라벨 ── */
+  .selection-label {
+    padding: 30px 26px 4px;
+    font-family: 'Italiana', serif;
+    color: var(--gold-deep);
+    font-size: 9.5px;
+    letter-spacing: 0.5em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .selection-label::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--line-strong), transparent);
+  }
+
+  /* ── 카드 (작은 명함처럼) ── */
+  .list { padding: 8px 0 16px; }
+  .card {
+    padding: 22px 28px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  .card + .card::before {
+    content: "·";
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--gold);
+    font-size: 14px;
+    opacity: 0.4;
+  }
+  .card-inner {
+    transition: all 0.3s ease;
+  }
+  .card:hover .card-inner {
+    transform: translateX(4px);
+  }
+  .card .title-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+  .card .title-left {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .card .name-kor {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: -0.005em;
+  }
+  .card .name-eng {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--gold);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    opacity: 0.85;
+  }
+  .card .ord {
+    font-family: 'Italiana', serif;
+    font-size: 10px;
+    color: var(--gold-deep);
+    letter-spacing: 0.35em;
+    flex-shrink: 0;
+  }
+  .card .meta {
+    display: flex;
+    gap: 10px;
+    font-size: 10px;
+    color: var(--text-soft);
+    letter-spacing: 0.28em;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-family: 'Pretendard', sans-serif;
+  }
+  .card .meta .cat { color: var(--gold-bright); }
+  .card .meta .sep { color: var(--muted); }
+  .card .private-tag {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--text-soft);
+    letter-spacing: 0.05em;
+  }
+  .card .private-tag::before {
+    content: "“";
+    color: var(--gold);
+    margin-right: 3px;
+  }
+  .card .private-tag::after {
+    content: "”";
+    color: var(--gold);
+    margin-left: 3px;
+  }
+
+  /* ── 뱃지 ── */
+  .badge-michelin {
+    display: inline-block;
+    background: transparent;
+    color: var(--red);
+    border: 1px solid var(--red);
+    font-size: 8.5px;
+    padding: 3px 7px;
+    letter-spacing: 0.3em;
+    font-weight: 500;
+    vertical-align: middle;
+    font-family: 'Italiana', serif;
+  }
+  .badge-vip {
+    display: inline-block;
+    background: transparent;
+    color: var(--gold);
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    font-size: 8.5px;
+    padding: 2px 9px;
+    letter-spacing: 0.4em;
+    font-weight: 400;
+    vertical-align: middle;
+    font-family: 'Italiana', serif;
+  }
+
+  /* ── 회원 모드 토글 (왁스 씰처럼) ── */
+  .mode-switch {
+    position: fixed;
+    bottom: 24px;
+    right: calc(50vw - 240px + 24px);
+    background: linear-gradient(180deg, rgba(7,6,10,0.95), rgba(13,11,16,0.95));
+    border: 1px solid var(--gold);
+    padding: 11px 22px;
+    color: var(--gold);
+    font-size: 9.5px;
+    cursor: pointer;
+    z-index: 50;
+    letter-spacing: 0.42em;
+    backdrop-filter: blur(10px);
+    font-family: 'Italiana', serif;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.6);
+  }
+  @media (max-width: 480px) {
+    .mode-switch { right: 24px; }
+  }
+
+  /* ── 푸터 사인 ── */
+  .signature {
+    text-align: center;
+    padding: 40px 24px 8px;
+    color: var(--muted);
+  }
+  .signature .line {
+    display: inline-block;
+    width: 60px; height: 1px;
+    background: var(--line-strong);
+    vertical-align: middle;
+    margin: 0 12px;
+  }
+  .signature .text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--text-soft);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="crest">
+    <div class="seal">C</div>
+    <div class="brand">THE CIRCLE</div>
+  </div>
+  <div class="invite-tag">By Invitation</div>
+</div>
+
+<div class="greeting">
+  <div class="salute">Welcome back,</div>
+  <h1>회원님을 위한<br/><em>비공개 셀렉션</em></h1>
+  <div class="ornament">— ◆ —</div>
+  <div class="by">CURATED · MMXXVI · SEOUL</div>
+</div>
+
+<div class="curator-note">
+  <div class="label">— Curator's Note —</div>
+  <div class="body">
+    이번 달, <em>228곳</em>의 식당이 회원님께만<br/>
+    조용히 안내됩니다.
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active">All<span class="count">228</span></div>
+  <div class="tab">한식<span class="count">68</span></div>
+  <div class="tab">일식<span class="count">43</span></div>
+  <div class="tab">이탈리안<span class="count">33</span></div>
+  <div class="tab">중식<span class="count">30</span></div>
+  <div class="tab">프렌치<span class="count">29</span></div>
+  <div class="tab">아메리칸<span class="count">20</span></div>
+</div>
+
+<div class="search-bar">
+  <input type="text" placeholder="이름, 동네 또는 분류로 찾기" />
+</div>
+
+<div class="selection-label">— Tonight's Selection</div>
+
+<div class="list">
+  <div class="card"><div class="card-inner">
+    <div class="title-row">
+      <div class="title-left">
+        <div class="name-kor">라연</div>
+        <span class="badge-michelin">MICHELIN</span>
+      </div>
+      <div class="ord">№ 001</div>
+    </div>
+    <div class="meta">
+      <span class="cat">한식</span><span class="sep">·</span>
+      <span>장충동</span><span class="sep">·</span>
+      <span>신라호텔</span>
+    </div>
+    <div class="private-tag">정찬으로 가장 안전한 선택</div>
+  </div></div>
+
+  <div class="card"><div class="card-inner">
+    <div class="title-row">
+      <div class="title-left">
+        <div class="name-kor">몽고네</div>
+        <span class="badge-vip">CIRCLE</span>
+      </div>
+      <div class="ord">№ 002</div>
+    </div>
+    <div class="meta">
+      <span class="cat">이탈리안</span><span class="sep">·</span>
+      <span>신사동</span>
+    </div>
+    <div class="private-tag">셰프가 신사동에 새로 차린 곳</div>
+  </div></div>
+
+  <div class="card"><div class="card-inner">
+    <div class="title-row">
+      <div class="title-left">
+        <div class="name-kor">더 라운드</div>
+      </div>
+      <div class="ord">№ 003</div>
+    </div>
+    <div class="meta">
+      <span class="cat">중식</span><span class="sep">·</span>
+      <span>청담동</span>
+    </div>
+  </div></div>
+
+  <div class="card"><div class="card-inner">
+    <div class="title-row">
+      <div class="title-left">
+        <div class="name-kor">RELA</div>
+      </div>
+      <div class="ord">№ 004</div>
+    </div>
+    <div class="meta">
+      <span class="cat">프렌치</span><span class="sep">·</span>
+      <span>상일동</span>
+    </div>
+    <div class="private-tag">조용히 다녀오기 좋음</div>
+  </div></div>
+
+  <div class="card"><div class="card-inner">
+    <div class="title-row">
+      <div class="title-left">
+        <div class="name-kor">푸에고</div>
+      </div>
+      <div class="ord">№ 005</div>
+    </div>
+    <div class="meta">
+      <span class="cat">아메리칸</span><span class="sep">·</span>
+      <span>한남동</span>
+    </div>
+  </div></div>
+
+  <div class="card"><div class="card-inner">
+    <div class="title-row">
+      <div class="title-left">
+        <div class="name-kor">휴135</div>
+      </div>
+      <div class="ord">№ 006</div>
+    </div>
+    <div class="meta">
+      <span class="cat">한식</span><span class="sep">·</span>
+      <span>한남동</span>
+    </div>
+    <div class="private-tag">늦은 자리에 어울림</div>
+  </div></div>
+</div>
+
+<div class="signature">
+  <div><span class="line"></span><span class="text">end of selection</span><span class="line"></span></div>
+</div>
+
+<button class="mode-switch">VIEWER</button>
+
+</body>
+</html>

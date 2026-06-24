@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VIP RESTAURANTS — A: 잉크 블랙</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./fonts/pretendard.css" />
+<style>
+  :root {
+    --bg: #0a0908;
+    --bg-card: #100e0c;
+    --line: rgba(167, 140, 84, 0.12);
+    --line-strong: rgba(167, 140, 84, 0.4);
+    --gold: #a78c54;
+    --gold-bright: #c4a366;
+    --red: #9a1c2f;
+    --text: #d8cfc1;
+    --muted: #6b6258;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html, body { background: var(--bg); color: var(--text); font-family: 'Pretendard', -apple-system, sans-serif; font-weight: 300; }
+  body { max-width: 480px; margin: 0 auto; min-height: 100vh; padding-bottom: 60px; }
+
+  .header {
+    background: #050403;
+    color: #fff;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--gold);
+    box-shadow: 0 1px 0 rgba(167,140,84,0.2);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .header .brand {
+    font-family: 'Playfair Display', 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.32em;
+    color: var(--gold);
+  }
+  .header .badge {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    border: 1px solid var(--line-strong);
+    padding: 4px 10px;
+    font-weight: 300;
+  }
+
+  .hero-title {
+    padding: 44px 24px 24px;
+    text-align: center;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-title h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+    font-style: italic;
+  }
+  .hero-title .sub {
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 0.42em;
+    margin-top: 14px;
+    font-weight: 300;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    padding: 18px 18px 18px;
+    scrollbar-width: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    flex-shrink: 0;
+    padding: 9px 18px;
+    font-size: 12px;
+    color: var(--muted);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    letter-spacing: 0.12em;
+    font-weight: 300;
+  }
+  .tab.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+    font-weight: 400;
+  }
+  .tab .count { opacity: 0.5; margin-left: 4px; font-size: 10px; }
+
+  .search-bar {
+    padding: 20px 22px 8px;
+  }
+  .search-bar input {
+    width: 100%;
+    background: transparent;
+    color: var(--text);
+    border: none;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+    padding: 12px 0;
+    font-size: 13px;
+    font-family: inherit;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+  .search-bar input:focus { outline: none; border-bottom-color: var(--gold); }
+  .search-bar input::placeholder { color: var(--muted); }
+
+  .list { padding: 12px 0; }
+  .card {
+    padding: 22px 24px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.25s;
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 0; height: 0;
+    background: var(--gold);
+    transition: all 0.3s;
+  }
+  .card:hover::before { width: 2px; height: 70%; }
+  .card:hover { padding-left: 28px; }
+  .card .top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .card .name {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.005em;
+  }
+  .card .name-eng {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+  }
+  .card .meta {
+    display: flex;
+    gap: 12px;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.18em;
+    font-weight: 300;
+    text-transform: uppercase;
+  }
+  .card .meta .cat {
+    color: var(--gold);
+  }
+  .card .meta .sep { color: var(--line-strong); }
+
+  .badge-michelin {
+    display: inline-block;
+    background: var(--red);
+    color: #f5e6c4;
+    font-size: 9px;
+    padding: 3px 8px;
+    letter-spacing: 0.25em;
+    font-weight: 400;
+    vertical-align: middle;
+    margin-left: 8px;
+    font-family: 'Playfair Display', serif;
+  }
+  .badge-vip {
+    display: inline-block;
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    font-size: 9px;
+    padding: 3px 9px;
+    letter-spacing: 0.3em;
+    font-weight: 400;
+    vertical-align: middle;
+    margin-left: 8px;
+    font-family: 'Playfair Display', serif;
+  }
+
+  .mode-switch {
+    position: fixed;
+    bottom: 22px;
+    right: calc(50vw - 240px + 22px);
+    background: rgba(10,9,8,0.92);
+    border: 1px solid var(--gold);
+    padding: 10px 18px;
+    color: var(--gold);
+    font-size: 11px;
+    cursor: pointer;
+    z-index: 50;
+    letter-spacing: 0.18em;
+    backdrop-filter: blur(8px);
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+  }
+  @media (max-width: 480px) {
+    .mode-switch { right: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="brand">VIP RESTAURANTS</div>
+  <div class="badge">CURATED · 2026</div>
+</div>
+
+<div class="hero-title">
+  <h1>Recommended</h1>
+  <div class="sub">SEOUL · 228 PLACES</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active">전체<span class="count">228</span></div>
+  <div class="tab">한식<span class="count">68</span></div>
+  <div class="tab">일식<span class="count">43</span></div>
+  <div class="tab">이탈리안<span class="count">33</span></div>
+  <div class="tab">중식<span class="count">30</span></div>
+  <div class="tab">프렌치<span class="count">29</span></div>
+  <div class="tab">아메리칸<span class="count">20</span></div>
+</div>
+
+<div class="search-bar">
+  <input type="text" placeholder="식당명 · 지역 · 업종 검색" />
+</div>
+
+<div class="list">
+  <div class="card">
+    <div class="top">
+      <div class="name">라연<span class="badge-michelin">MICHELIN</span></div>
+      <div class="name-eng">Layeon</div>
+    </div>
+    <div class="meta">
+      <span class="cat">한식</span><span class="sep">·</span>
+      <span>장충동</span><span class="sep">·</span>
+      <span>신라호텔</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="top">
+      <div class="name">몽고네<span class="badge-vip">VIP PICK</span></div>
+      <div class="name-eng">Mongone</div>
+    </div>
+    <div class="meta">
+      <span class="cat">이탈리안</span><span class="sep">·</span>
+      <span>신사동</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="top">
+      <div class="name">더 라운드</div>
+      <div class="name-eng">The Round</div>
+    </div>
+    <div class="meta">
+      <span class="cat">중식</span><span class="sep">·</span>
+      <span>청담동</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="top">
+      <div class="name">RELA</div>
+      <div class="name-eng">Rela</div>
+    </div>
+    <div class="meta">
+      <span class="cat">프렌치</span><span class="sep">·</span>
+      <span>상일동</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="top">
+      <div class="name">푸에고</div>
+      <div class="name-eng">Fuego</div>
+    </div>
+    <div class="meta">
+      <span class="cat">아메리칸</span><span class="sep">·</span>
+      <span>한남동</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="top">
+      <div class="name">휴135</div>
+      <div class="name-eng">Hue135</div>
+    </div>
+    <div class="meta">
+      <span class="cat">한식</span><span class="sep">·</span>
+      <span>한남동</span>
+    </div>
+  </div>
+</div>
+
+<button class="mode-switch">👤 임원 모드</button>
+
+</body>
+</html>
