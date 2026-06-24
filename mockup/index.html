@@ -4,57 +4,59 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>VIP RESTAURANTS — 목업</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./fonts/pretendard.css" />
 <style>
   :root {
-    --bg: #0d0d0f;
-    --bg-2: #15151a;
-    --line: #2a2a30;
-    --gold: #c9a96e;
-    --gold-soft: #b89968;
+    --bg: #ffffff;
+    --bg-2: #f7f7f7;
+    --line: #e5e5e5;
+    --line-dark: #1a1a1a;
+    --black: #0a0a0a;
     --red: #c8102e;
-    --text: #ececec;
-    --muted: #8a8a92;
+    --text: #1a1a1a;
+    --text-soft: #555;
+    --muted: #999;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   html, body { background: var(--bg); color: var(--text); font-family: 'Pretendard', -apple-system, sans-serif; }
   body { max-width: 480px; margin: 0 auto; min-height: 100vh; padding-bottom: 40px; }
   a { color: inherit; text-decoration: none; }
 
-  /* ── Header (블루리본 톤 검정띠) ── */
+  /* ── Header (블루리본 톤 검정 띠 + 흰 텍스트) ── */
   .header {
-    background: #000;
+    background: var(--black);
     color: #fff;
-    padding: 14px 18px;
+    padding: 18px 22px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid var(--gold);
     position: sticky; top: 0; z-index: 10;
   }
   .header .brand {
-    font-family: 'Cormorant Garamond', 'Pretendard', sans-serif;
+    font-family: 'Pretendard', sans-serif;
     font-size: 18px;
-    letter-spacing: 0.18em;
-    color: var(--gold);
-    font-weight: 600;
+    letter-spacing: 0.32em;
+    color: #fff;
+    font-weight: 400;
   }
-  .header .badge {
+  .header .since {
     font-size: 10px;
-    letter-spacing: 0.2em;
-    color: #888;
-    border: 1px solid #444;
-    padding: 3px 8px;
-    border-radius: 2px;
+    letter-spacing: 0.18em;
+    color: #aaa;
+    margin-left: 12px;
+    font-weight: 400;
+  }
+  .header .menu {
+    color: #fff;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
   }
 
   /* ── Mode banner (Owner 모드 시) ── */
   .mode-banner {
     background: var(--bg-2);
-    color: var(--gold);
+    color: var(--text);
     text-align: center;
     font-size: 11px;
     padding: 6px;
@@ -64,21 +66,23 @@
 
   /* ── Title section ── */
   .hero-title {
-    padding: 28px 20px 16px;
+    padding: 32px 20px 18px;
     text-align: center;
+    border-bottom: 1px solid var(--line);
   }
   .hero-title h1 {
-    font-family: 'Cormorant Garamond', 'Pretendard', sans-serif;
+    font-family: 'Pretendard', sans-serif;
     font-size: 26px;
     font-weight: 600;
-    color: var(--gold);
-    letter-spacing: 0.05em;
+    color: var(--text);
+    letter-spacing: 0.04em;
   }
   .hero-title .sub {
-    color: var(--muted);
+    color: var(--text-soft);
     font-size: 11px;
-    letter-spacing: 0.25em;
-    margin-top: 6px;
+    letter-spacing: 0.32em;
+    margin-top: 8px;
+    font-weight: 400;
   }
 
   /* ── Category tabs ── */
@@ -86,49 +90,53 @@
     display: flex;
     gap: 8px;
     overflow-x: auto;
-    padding: 12px 18px 16px;
+    padding: 16px 18px 18px;
     border-bottom: 1px solid var(--line);
     scrollbar-width: none;
   }
   .tabs::-webkit-scrollbar { display: none; }
   .tab {
     flex-shrink: 0;
-    padding: 7px 16px;
+    padding: 8px 16px;
     font-size: 13px;
-    color: var(--muted);
+    color: var(--text-soft);
+    background: #fff;
     border: 1px solid var(--line);
     border-radius: 999px;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.15s;
     white-space: nowrap;
-  }
-  .tab.active {
-    background: var(--gold);
-    color: #111;
-    border-color: var(--gold);
     font-weight: 500;
+  }
+  .tab:hover { border-color: var(--text); }
+  .tab.active {
+    background: var(--black);
+    color: #fff;
+    border-color: var(--black);
   }
 
   /* ── Search ── */
   .search-bar {
-    padding: 14px 18px 6px;
+    padding: 16px 18px 6px;
   }
   .search-bar input {
     width: 100%;
     background: var(--bg-2);
     color: var(--text);
     border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: 11px 14px;
+    border-radius: 999px;
+    padding: 12px 18px;
     font-size: 14px;
     font-family: inherit;
+    font-weight: 400;
   }
+  .search-bar input:focus { outline: none; border-color: var(--black); }
   .search-bar input::placeholder { color: var(--muted); }
 
   /* ── Restaurant cards (텍스트 중심) ── */
   .list { padding: 8px 0; }
   .card {
-    padding: 18px 20px;
+    padding: 20px 22px;
     border-bottom: 1px solid var(--line);
     display: flex;
     flex-direction: column;
@@ -151,10 +159,11 @@
     letter-spacing: -0.01em;
   }
   .card .name-eng {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Pretendard', sans-serif;
     font-size: 13px;
     color: var(--muted);
-    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0.01em;
   }
   .card .meta {
     display: flex;
@@ -164,32 +173,32 @@
     letter-spacing: 0.02em;
   }
   .card .meta .cat {
-    color: var(--gold-soft);
+    color: var(--text);
     font-weight: 500;
   }
-  .card .meta .sep { color: #444; }
+  .card .meta .sep { color: var(--line); }
   .badge-michelin {
     display: inline-block;
     background: var(--red);
     color: #fff;
     font-size: 9px;
-    padding: 2px 6px;
+    padding: 2px 7px;
     border-radius: 2px;
     letter-spacing: 0.15em;
-    font-weight: 600;
+    font-weight: 700;
     vertical-align: middle;
     margin-left: 6px;
   }
   .badge-vip {
     display: inline-block;
     background: transparent;
-    color: var(--gold);
-    border: 1px solid var(--gold-soft);
+    color: var(--text);
+    border: 1px solid var(--text);
     font-size: 9px;
-    padding: 2px 6px;
+    padding: 2px 7px;
     border-radius: 2px;
     letter-spacing: 0.15em;
-    font-weight: 500;
+    font-weight: 600;
     vertical-align: middle;
     margin-left: 6px;
   }
@@ -207,25 +216,25 @@
   }
   .detail.open { display: block; }
   .detail .top-nav {
-    background: #000;
+    background: var(--black);
     color: #fff;
-    padding: 14px 18px;
-    border-bottom: 1px solid var(--gold);
+    padding: 18px 22px;
     position: sticky; top: 0;
     display: flex;
     align-items: center;
     gap: 14px;
   }
   .detail .top-nav .back {
-    color: var(--gold);
-    font-size: 16px;
+    color: #fff;
+    font-size: 18px;
     cursor: pointer;
   }
   .detail .top-nav .title-mini {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 14px;
-    color: var(--gold);
-    letter-spacing: 0.15em;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 13px;
+    color: #fff;
+    letter-spacing: 0.28em;
+    font-weight: 400;
   }
 
   .detail .hero-img {
@@ -235,61 +244,59 @@
     background-position: center;
     position: relative;
   }
-  .detail .hero-img::after {
-    content: "";
-    position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(13,13,15,0.95) 100%);
-  }
   .detail .hero-cap {
     text-align: right;
     color: var(--muted);
     font-size: 9.5px;
-    padding: 4px 16px;
+    padding: 6px 18px;
     letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--line);
   }
 
   .detail .head {
-    padding: 20px 22px 6px;
+    padding: 24px 22px 8px;
   }
   .detail .head .ko {
     font-family: 'Pretendard', sans-serif;
     font-size: 26px;
     font-weight: 700;
+    color: var(--text);
   }
   .detail .head .en {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Pretendard', sans-serif;
     font-size: 14px;
     color: var(--muted);
     margin-top: 4px;
-    font-style: italic;
+    font-weight: 400;
   }
   .detail .head .meta {
-    margin-top: 10px;
+    margin-top: 12px;
     font-size: 12.5px;
-    color: var(--muted);
+    color: var(--text-soft);
     letter-spacing: 0.04em;
   }
-  .detail .head .meta .cat { color: var(--gold-soft); font-weight: 500; }
+  .detail .head .meta .cat { color: var(--text); font-weight: 500; }
 
   /* Action buttons (네이버 패턴) */
   .actions {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
-    padding: 18px 18px 8px;
+    gap: 8px;
+    padding: 20px 18px 10px;
   }
   .action {
-    background: var(--bg-2);
+    background: #fff;
     color: var(--text);
     border: 1px solid var(--line);
-    border-radius: 6px;
-    padding: 12px 4px;
+    border-radius: 8px;
+    padding: 14px 4px;
     text-align: center;
     cursor: pointer;
     font-size: 11.5px;
+    font-weight: 500;
     transition: all 0.15s;
   }
-  .action:hover { border-color: var(--gold); color: var(--gold); }
+  .action:hover { border-color: var(--black); }
   .action .icon {
     display: block;
     font-size: 18px;
@@ -320,15 +327,16 @@
   }
   .badge-private {
     display: inline-block;
-    background: rgba(201,169,110,0.15);
-    color: var(--gold);
-    border: 1px solid var(--gold-soft);
+    background: var(--bg-2);
+    color: var(--text);
+    border: 1px solid var(--line);
     font-size: 9px;
-    padding: 1px 5px;
+    padding: 1px 6px;
     border-radius: 2px;
     letter-spacing: 0.1em;
     margin-right: 6px;
     vertical-align: middle;
+    font-weight: 500;
   }
   .badge-public {
     display: inline-block;
@@ -336,28 +344,29 @@
     color: var(--muted);
     border: 1px solid var(--line);
     font-size: 9px;
-    padding: 1px 5px;
+    padding: 1px 6px;
     border-radius: 2px;
     letter-spacing: 0.1em;
     margin-right: 6px;
     vertical-align: middle;
+    font-weight: 500;
   }
 
   /* Mode toggle (Owner 미리보기 시뮬) */
   .mode-switch {
     position: fixed;
-    bottom: 16px;
-    right: calc(50vw - 240px + 16px);
-    background: rgba(0,0,0,0.85);
-    border: 1px solid var(--gold);
+    bottom: 18px;
+    right: calc(50vw - 240px + 18px);
+    background: var(--black);
+    border: 1px solid var(--black);
     border-radius: 999px;
-    padding: 8px 14px;
-    color: var(--gold);
+    padding: 10px 18px;
+    color: #fff;
     font-size: 11px;
     cursor: pointer;
     z-index: 50;
-    letter-spacing: 0.1em;
-    backdrop-filter: blur(6px);
+    letter-spacing: 0.12em;
+    font-weight: 500;
   }
   @media (max-width: 480px) {
     .mode-switch { right: 16px; }
@@ -369,8 +378,11 @@
 <!-- ── List View ── -->
 <div id="list-view">
   <div class="header">
-    <div class="brand">VIP RESTAURANTS</div>
-    <div class="badge">CURATED · 2026</div>
+    <div style="display:flex;align-items:baseline;">
+      <div class="brand">V I P  R E S T A U R A N T S</div>
+      <div class="since">SINCE 2026</div>
+    </div>
+    <div class="menu">≡</div>
   </div>
 
   <div class="mode-banner" id="mode-banner" style="display:none;">
@@ -485,7 +497,7 @@
     <div class="back" onclick="closeDetail()">‹</div>
     <div class="title-mini">VIP RESTAURANTS</div>
   </div>
-  <div class="hero-img" style="background-image: linear-gradient(135deg, #1a1410 0%, #2c2018 50%, #14100b 100%);">
+  <div class="hero-img" style="background: var(--bg-2); display:flex; align-items:center; justify-content:center; font-size: 80px;">🍚
   </div>
   <div class="hero-cap">이미지: 한식 카테고리 대표</div>
 
