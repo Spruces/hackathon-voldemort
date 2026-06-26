@@ -13,7 +13,7 @@ import {
   Phone,
 } from "lucide-react";
 import { cn } from "@/lib/cn";
-import { CATEGORIES, getCategoryEmoji } from "@/lib/constants";
+import { getCategoryEmoji } from "@/lib/constants";
 
 interface Restaurant {
   id: number;
@@ -26,6 +26,9 @@ interface Restaurant {
   address: string;
   lat: number | null;
   lng: number | null;
+  district: string | null;
+  imageUrl: string | null;
+  rating: string | null;
   catchtableAlias: string | null;
   catchtableMatched: boolean;
 }
@@ -75,6 +78,7 @@ export default function MapPage() {
   const [selectedDate, setSelectedDate] = useState<string | null>(null); // YYYY-MM-DD or null (지금 바로)
   const [selectedPersons, setSelectedPersons] = useState(2);
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedDistrict, setSelectedDistrict] = useState("all");
   const [selectedLocation, setSelectedLocation] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [isNowMode, setIsNowMode] = useState(true);
@@ -97,8 +101,8 @@ export default function MapPage() {
   const markersRef = useRef<any[]>([]);
   const dateInputRef = useRef<HTMLInputElement>(null);
 
-  // 1. 데이터 로드
-  useEffect(() => {
+  // 1. 데이터 로드 (+ 페이지 복귀 시 리로드)
+  const loadRestaurants = useCallback(() => {
     fetch("/api/restaurants")
       .then((r) => r.json())
       .then((data) => {
@@ -108,27 +112,40 @@ export default function MapPage() {
       });
   }, []);
 
-  // 2. 위치 가져오기
   useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          setUserLocation({
-            lat: pos.coords.latitude,
-            lng: pos.coords.longitude,
-          });
-        },
-        () => {
-          // 기본: 강남역
-          setUserLocation({ lat: 37.498095, lng: 127.02761 });
-          setLocationError(true);
-        },
-        { enableHighAccuracy: true, timeout: 5000 }
-      );
-    } else {
+    loadRestaurants();
+
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible") loadRestaurants();
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+    return () => document.removeEventListener("visibilitychange", handleVisibility);
+  }, [loadRestaurants]);
+
+  // 2. 위치 추적 (이동 시 자동 갱신)
+  useEffect(() => {
+    if (!navigator.geolocation) {
       setUserLocation({ lat: 37.498095, lng: 127.02761 });
       setLocationError(true);
+      return;
     }
+
+    const watchId = navigator.geolocation.watchPosition(
+      (pos) => {
+        setUserLocation({
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude,
+        });
+        setLocationError(false);
+      },
+      () => {
+        setUserLocation((prev) => prev || { lat: 37.498095, lng: 127.02761 });
+        setLocationError(true);
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 30000 }
+    );
+
+    return () => navigator.geolocation.clearWatch(watchId);
   }, []);
 
   // 3. 카카오맵 초기화
@@ -164,6 +181,16 @@ export default function MapPage() {
     };
     document.head.appendChild(script);
   }, [userLocation, restaurants]);
+
+  // 3-1. 위치 변경 시 지도 센터 이동
+  useEffect(() => {
+    if (!kakaoMapRef.current || !userLocation) return;
+    const kakao = (window as any).kakao;
+    if (!kakao) return;
+    kakaoMapRef.current.setCenter(
+      new kakao.maps.LatLng(userLocation.lat, userLocation.lng)
+    );
+  }, [userLocation]);
 
   // 4. 지도 마커 업데이트
   const updateMapMarkers = useCallback(
@@ -269,27 +296,48 @@ export default function MapPage() {
   }, [selectedDate, selectedPersons, restaurants.length]);
 
 
-  // 지역 목록 (건수 내림차순)
-  const locations = useMemo(() => {
+  // 업종 목록 (데이터 기반 동적)
+  const categoryList = useMemo(() => {
     const counts: Record<string, number> = {};
     for (const r of restaurants) {
-      counts[r.locationNorm] = (counts[r.locationNorm] || 0) + 1;
+      counts[r.categoryNorm] = (counts[r.categoryNorm] || 0) + 1;
     }
     return Object.entries(counts)
       .sort((a, b) => b[1] - a[1])
-      .map(([name, count]) => ({ name, count }));
+      .map(([name, count]) => ({ key: name, label: name, emoji: getCategoryEmoji(name), count }));
+  }, [restaurants]);
+
+  // 구 → 동 그룹 (DB district 기반, 자동 분류)
+  const districtData = useMemo(() => {
+    const groups: Record<string, Record<string, number>> = {};
+    for (const r of restaurants) {
+      const dist = r.district || "기타";
+      if (!groups[dist]) groups[dist] = {};
+      groups[dist][r.locationNorm] = (groups[dist][r.locationNorm] || 0) + 1;
+    }
+    return Object.entries(groups)
+      .map(([district, dongMap]) => {
+        const dongs = Object.entries(dongMap)
+          .map(([name, count]) => ({ name, count }))
+          .sort((a, b) => b.count - a.count);
+        return { district, dongs, total: dongs.reduce((s, d) => s + d.count, 0) };
+      })
+      .sort((a, b) => b.total - a.total);
   }, [restaurants]);
 
   const activeFilterCount =
     (selectedCategory !== "all" ? 1 : 0) +
-    (selectedLocation !== "all" ? 1 : 0);
+    (selectedDistrict !== "all" || selectedLocation !== "all" ? 1 : 0);
 
   // 8. 필터링된 리스트
   const filteredRestaurants = restaurants.filter((r) => {
     if (selectedCategory !== "all" && r.categoryNorm !== selectedCategory)
       return false;
-    if (selectedLocation !== "all" && r.locationNorm !== selectedLocation)
-      return false;
+    if (selectedLocation !== "all") {
+      if (r.locationNorm !== selectedLocation) return false;
+    } else if (selectedDistrict !== "all") {
+      if ((r.district || "기타") !== selectedDistrict) return false;
+    }
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
       if (
@@ -511,16 +559,16 @@ export default function MapPage() {
                   </button>
                 </span>
               )}
-              {selectedLocation !== "all" && (
+              {(selectedDistrict !== "all" || selectedLocation !== "all") && (
                 <span className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-gold/10 border border-gold/20 text-xs text-gold">
-                  {selectedLocation}
-                  <button onClick={() => setSelectedLocation("all")} className="ml-0.5">
+                  {selectedLocation !== "all" ? selectedLocation : selectedDistrict}
+                  <button onClick={() => { setSelectedDistrict("all"); setSelectedLocation("all"); }} className="ml-0.5">
                     <X className="w-3 h-3" />
                   </button>
                 </span>
               )}
               <button
-                onClick={() => { setSelectedCategory("all"); setSelectedLocation("all"); }}
+                onClick={() => { setSelectedCategory("all"); setSelectedDistrict("all"); setSelectedLocation("all"); }}
                 className="px-2.5 py-1 rounded-full text-xs text-text-muted border border-border"
               >
                 초기화
@@ -538,9 +586,20 @@ export default function MapPage() {
                 transition={{ duration: 0.2 }}
                 className="overflow-hidden flex flex-col gap-2"
               >
-                {/* 업종 */}
+                {/* 업종 (데이터 기반 동적) */}
                 <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-hide">
-                  {CATEGORIES.map((cat) => (
+                  <button
+                    onClick={() => setSelectedCategory("all")}
+                    className={cn(
+                      "px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-all",
+                      selectedCategory === "all"
+                        ? "bg-gold/20 border border-gold text-gold"
+                        : "bg-surface/80 backdrop-blur border border-glass-border text-text-secondary"
+                    )}
+                  >
+                    전체
+                  </button>
+                  {categoryList.map((cat) => (
                     <button
                       key={cat.key}
                       onClick={() => setSelectedCategory(cat.key)}
@@ -552,39 +611,74 @@ export default function MapPage() {
                       )}
                     >
                       {cat.emoji} {cat.label}
+                      <span className="ml-1 opacity-50">{cat.count}</span>
                     </button>
                   ))}
                 </div>
 
-                {/* 지역 */}
-                <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-hide pb-1">
+                {/* 지역 — 1단: 구 */}
+                <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-hide">
                   <button
-                    onClick={() => setSelectedLocation("all")}
+                    onClick={() => { setSelectedDistrict("all"); setSelectedLocation("all"); }}
                     className={cn(
                       "px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-all",
-                      selectedLocation === "all"
+                      selectedDistrict === "all" && selectedLocation === "all"
                         ? "bg-gold/20 border border-gold text-gold"
                         : "bg-surface/80 backdrop-blur border border-glass-border text-text-secondary"
                     )}
                   >
                     전체 지역
                   </button>
-                  {locations.map((loc) => (
+                  {districtData.map((d) => (
                     <button
-                      key={loc.name}
-                      onClick={() => setSelectedLocation(loc.name)}
+                      key={d.district}
+                      onClick={() => { setSelectedDistrict(d.district); setSelectedLocation("all"); }}
                       className={cn(
                         "px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-all",
-                        selectedLocation === loc.name
+                        selectedDistrict === d.district
                           ? "bg-gold/20 border border-gold text-gold"
                           : "bg-surface/80 backdrop-blur border border-glass-border text-text-secondary"
                       )}
                     >
-                      {loc.name}
-                      <span className="ml-1 opacity-50">{loc.count}</span>
+                      {d.district}
+                      <span className="ml-1 opacity-50">{d.total}</span>
                     </button>
                   ))}
                 </div>
+
+                {/* 지역 — 2단: 동 (구 선택 시) */}
+                {selectedDistrict !== "all" && (
+                  <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-hide pb-1">
+                    <button
+                      onClick={() => setSelectedLocation("all")}
+                      className={cn(
+                        "px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-all",
+                        selectedLocation === "all"
+                          ? "bg-gold/15 border border-gold/60 text-gold"
+                          : "bg-surface/80 backdrop-blur border border-glass-border text-text-secondary"
+                      )}
+                    >
+                      {selectedDistrict} 전체
+                    </button>
+                    {districtData
+                      .find((d) => d.district === selectedDistrict)
+                      ?.dongs.map((dong) => (
+                        <button
+                          key={dong.name}
+                          onClick={() => setSelectedLocation(dong.name)}
+                          className={cn(
+                            "px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-all",
+                            selectedLocation === dong.name
+                              ? "bg-gold/20 border border-gold text-gold"
+                              : "bg-surface/80 backdrop-blur border border-glass-border text-text-secondary"
+                          )}
+                        >
+                          {dong.name}
+                          <span className="ml-1 opacity-50">{dong.count}</span>
+                        </button>
+                      ))}
+                  </div>
+                )}
               </motion.div>
             )}
           </AnimatePresence>
@@ -678,7 +772,7 @@ function RestaurantCard({
         "transition-all hover:border-gold/30"
       )}
     >
-      {/* 도달시간 */}
+      {/* 도달시간 or 매장 이미지 */}
       <div className="flex flex-col items-center justify-center min-w-[56px]">
         {eta ? (
           <>
@@ -688,7 +782,13 @@ function RestaurantCard({
             <span className="text-[10px] text-text-muted">분</span>
           </>
         ) : (
-          <span className="text-2xl">{emoji}</span>
+          <div className="w-14 h-14 rounded-xl overflow-hidden bg-surface border border-border/30">
+            {restaurant.imageUrl ? (
+              <img src={restaurant.imageUrl} alt="" className="w-full h-full object-cover" />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-xl">{emoji}</div>
+            )}
+          </div>
         )}
       </div>
 

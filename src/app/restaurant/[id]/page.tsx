@@ -325,14 +325,10 @@ export default function RestaurantDetailPage({
           </div>
         )}
 
-        {/* Owner 전용: 비공개 메모 */}
+        {/* Owner 전용: 메모 */}
         {role === "owner" && restaurant.internalMemo && (
           <div className="bg-surface rounded-2xl p-4 border border-gold/20">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-xs px-2 py-0.5 rounded bg-gold/10 text-gold">
-                🔒 나만 보기
-              </span>
-            </div>
+            <span className="text-xs text-gold font-medium block mb-2">Memo(나만 보기)</span>
             <p className="text-sm text-text-secondary whitespace-pre-line">
               {restaurant.internalMemo}
             </p>

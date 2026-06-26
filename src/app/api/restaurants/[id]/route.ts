@@ -58,12 +58,21 @@ export async function PATCH(
     "parking",
     "categoryNorm",
     "catchtableAlias",
+    "lat",
+    "lng",
+    "tel",
+    "address",
+    "nameEng",
   ];
   const updateData: Record<string, unknown> = {};
 
   for (const field of allowedFields) {
     if (field in body) {
-      updateData[field] = body[field];
+      if (field === "lat" || field === "lng") {
+        updateData[field] = body[field] !== null ? Number(body[field]) : null;
+      } else {
+        updateData[field] = body[field];
+      }
     }
   }
 
@@ -80,4 +89,23 @@ export async function PATCH(
   });
 
   return NextResponse.json(updated);
+}
+
+export async function DELETE(
+  _request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const role = await getRole();
+  if (role !== "owner") {
+    return NextResponse.json({ error: "삭제 권한 없음" }, { status: 403 });
+  }
+
+  const { id } = await params;
+  const restaurantId = parseInt(id);
+
+  await prisma.daySlotCache.deleteMany({ where: { restaurantId } });
+  await prisma.catchtableCache.deleteMany({ where: { restaurantId } });
+  await prisma.restaurant.delete({ where: { id: restaurantId } });
+
+  return NextResponse.json({ ok: true });
 }

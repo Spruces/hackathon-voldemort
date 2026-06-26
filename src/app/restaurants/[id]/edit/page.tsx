@@ -184,7 +184,7 @@ export default function EditRestaurantPage() {
           <textarea
             value={internalMemo}
             onChange={(e) => setInternalMemo(e.target.value)}
-            placeholder="사장님만 볼 수 있는 메모입니다."
+            placeholder="나만 볼 수 있는 메모입니다."
             rows={4}
             className="w-full px-4 py-3 rounded-xl bg-surface border border-gold/20 text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-gold/40 resize-none"
           />

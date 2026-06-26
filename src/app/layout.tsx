@@ -3,8 +3,8 @@ import { AppShell } from "@/components/app-shell";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "추천 식당",
-  description: "VIP 식당 큐레이션",
+  title: "THE GUIDE",
+  description: "VIP Restaurant Curation",
 };
 
 export const viewport: Viewport = {

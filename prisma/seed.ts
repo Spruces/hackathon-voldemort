@@ -86,7 +86,7 @@ function parseMemo(memo: string | null): {
     ) {
       hours = hours ? `${hours}, ${line}` : line;
     } else if (
-      /추천|소개|단골|접대|VIP|내부|사장|대표/i.test(line) ||
+      /추천|소개|단골|VIP|내부|사장|대표/i.test(line) ||
       /\(.*\)\s*추천/.test(line)
     ) {
       internalParts.push(line);

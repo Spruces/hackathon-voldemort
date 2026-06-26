@@ -18,6 +18,7 @@ model Restaurant {
   categoryRaw  String?
   tel          String?
   address      String
+  district     String?
   lat          Float?
   lng          Float?
   publicDesc   String?

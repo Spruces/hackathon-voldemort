@@ -98,7 +98,7 @@ export default function RestaurantsPage() {
             animate={{ opacity: 1 }}
             className="text-xl font-bold"
           >
-            추천 식당
+            THE GUIDE
           </motion.h1>
           <ModeBadge
             role={role}

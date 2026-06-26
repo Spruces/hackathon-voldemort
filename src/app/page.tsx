@@ -79,9 +79,8 @@ export default function LoginPage() {
             <Lock className="w-7 h-7 text-gold" />
           </div>
           <div className="text-center">
-            <p className="text-xs text-gold/70 mb-1 tracking-widest">VIP RESTAURANTS</p>
             <h1 className="text-2xl font-bold tracking-tight text-gold">
-              추천 식당
+              THE GUIDE
             </h1>
             <p className="text-sm text-text-secondary mt-2">
               비밀번호를 입력해 주세요

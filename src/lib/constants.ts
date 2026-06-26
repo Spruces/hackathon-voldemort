@@ -16,6 +16,25 @@ export function getCategoryEmoji(category: string): string {
   return found?.emoji || "🍽";
 }
 
+// 카카오맵 category_name → 대표 업종 자동 매핑
+// "음식점 > 일식 > 초밥,롤" → "일식"
+// "음식점 > 양식 > 이탈리안" → "이탈리안"
+export function parseCategoryFromKakao(categoryName: string): string {
+  const parts = categoryName.split(">").map((s) => s.trim());
+  const sub = parts[1] || "";
+  const detail = parts[2] || "";
+
+  if (sub.includes("일식") || detail.includes("일식")) return "일식";
+  if (detail.includes("이탈리") || sub.includes("이탈리")) return "이탈리안";
+  if (detail.includes("프랑스") || detail.includes("프렌치")) return "프렌치";
+  if (sub.includes("중식") || detail.includes("중국")) return "중식";
+  if (sub.includes("한식") || detail.includes("한식")) return "한식";
+  if (sub.includes("양식")) return "아메리칸·양식";
+  if (sub.includes("퓨전")) return detail.includes("한식") ? "한식" : "아메리칸·양식";
+  if (sub.includes("분식") || sub.includes("육류") || sub.includes("국밥") || sub.includes("찜")) return "한식";
+  return "아시안·기타";
+}
+
 export const CATEGORY_NORM_MAP: Record<string, string> = {
   Korean: "한식",
   한식: "한식",
@@ -60,3 +79,4 @@ export const LOCATION_NORM_MAP: Record<string, string> = {
   "한남동/이태원": "한남동",
   "서울역/마포": "서울역",
 };
+
